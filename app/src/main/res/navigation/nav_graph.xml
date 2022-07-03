@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/wellcomeFragment">
+
+    <fragment
+        android:id="@+id/wellcomeFragment"
+        android:name="com.example.stranger.ui.wellcom.WellcomeFragment"
+        android:label="fragment_wellcome"
+        tools:layout="@layout/fragment_wellcome">
+        <action
+            android:id="@+id/action_wellcomeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_wellcomeFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_wellcomeFragment_to_newProFileFragment"
+            app:destination="@id/newProFileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.stranger.ui.signIn.SignInFragment"
+        android:label="SignInFragment">
+        <action
+            android:id="@+id/action_signInFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_newProFileFragment"
+            app:destination="@id/newProFileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.stranger.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_wellcomeFragment"
+            app:destination="@id/wellcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.stranger.ui.signUp.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_newProFileFragment"
+            app:destination="@id/newProFileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newProFileFragment"
+        android:name="com.example.stranger.ui.newProFile.NewProFileFragment"
+        android:label="fragment_new_pro_file"
+        tools:layout="@layout/fragment_new_pro_file" >
+        <action
+            android:id="@+id/action_newProFileFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+</navigation>

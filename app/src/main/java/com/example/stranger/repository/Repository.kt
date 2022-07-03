@@ -1,0 +1,97 @@
+package com.example.stranger.repository
+
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.example.stranger.Service.Api
+import com.example.stranger.common.State
+import com.example.stranger.common.State.Success
+import com.example.stranger.model.ProFile
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.trySendBlocking
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import javax.inject.Inject
+
+class Repository @Inject constructor(
+    private var api: Api
+) {
+    var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    val firebaseDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
+    val proFileDatabase = firebaseDatabase.child("profile")
+
+
+
+    fun login(email: String, password: String): Flow<State<FirebaseUser?>> = callbackFlow {
+        trySend(State.Loading)
+
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
+            if(it.isSuccessful){
+                trySendBlocking(Success(firebaseAuth.currentUser))
+            }else {
+                trySendBlocking(State.Error(it.exception?.message.toString()))
+            }
+        }.addOnFailureListener {
+            trySendBlocking(State.Error(it.message.toString()))
+        }
+        awaitClose {
+            close()
+        }
+    }
+    fun signUp(email: String, password: String): Flow<State<FirebaseUser?>> = callbackFlow {
+        trySend(State.Loading)
+        val onCompleteListener = OnCompleteListener<AuthResult> {
+            if (it.isSuccessful) {
+                trySendBlocking(State.Success(firebaseAuth.currentUser))
+            } else {
+                trySendBlocking(State.Error(it.exception?.message.toString()))
+                Log.d(TAG, "login: fales")
+            }
+        }
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(onCompleteListener)
+        awaitClose {
+            close()
+        }
+    }
+
+    fun getUid() : String? = firebaseAuth.uid
+
+    fun getProFile(uid: String): Flow<State<ProFile>> = callbackFlow {
+        trySend(State.Loading)
+        proFileDatabase.child(uid).addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                trySendBlocking(Success(snapshot.getValue(ProFile::class.java)as ProFile))
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                trySendBlocking(State.Error(error.message))
+            }
+
+        })
+        awaitClose {
+            close()
+        }
+    }
+    fun upDateProFile(uid: String, proFile: ProFile) : Flow<State<ProFile>> = callbackFlow {
+        trySend(State.Loading)
+        proFileDatabase.child(uid).setValue(proFile).addOnCompleteListener{
+            trySendBlocking(Success(proFile))
+        }.addOnFailureListener {
+            trySendBlocking(State.Error(it.message.toString()))
+        }
+        awaitClose{
+            close()
+        }
+    }
+
+
+
+
+}
+
+

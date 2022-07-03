@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "129775139705",
+    "firebase_url": "https://stranger-93947-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "stranger-93947",
+    "storage_bucket": "stranger-93947.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129775139705:android:6c41619fb6850995194da8",
+        "android_client_info": {
+          "package_name": "com.example.stranger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129775139705-if4phrl2gquqmhkcbrracavppfbrc14e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stranger",
+            "certificate_hash": "9805378503849b4eff7adb1c2b524b85611a24a1"
+          }
+        },
+        {
+          "client_id": "129775139705-3qq947gl6kkrg4s0f456su27u3nqtbv1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe0kv1NEMpyRN433fID5i5bIP7W4eUS3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129775139705-3qq947gl6kkrg4s0f456su27u3nqtbv1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
