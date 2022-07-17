@@ -19,11 +19,13 @@
         <action
             android:id="@+id/action_wellcomeFragment_to_newProFileFragment"
             app:destination="@id/newProFileFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.stranger.ui.signIn.SignInFragment"
-        android:label="SignInFragment">
+        android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -43,15 +45,15 @@
         <action
             android:id="@+id/action_mainFragment_to_wellcomeFragment"
             app:destination="@id/wellcomeFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchHomeFragment"
+            app:destination="@id/searchHomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.stranger.ui.signUp.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
         <action
             android:id="@+id/action_signUpFragment_to_newProFileFragment"
             app:destination="@id/newProFileFragment" />
@@ -65,5 +67,11 @@
             android:id="@+id/action_newProFileFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/searchHomeFragment"
+        android:name="com.example.stranger.ui.home.searchHome.SearchHomeFragment"
+        android:label="fragment_search_home"
+        tools:layout="@layout/fragment_search_home" />
 
 </navigation>

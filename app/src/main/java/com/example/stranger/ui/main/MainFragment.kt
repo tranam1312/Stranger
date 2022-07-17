@@ -23,6 +23,7 @@ class MainFragment : BaseFragmentWithBinding<FragmentMainBinding>() {
         fun newInstance() = MainFragment()
     }
 
+
     private lateinit var viewPager: ViewPager
     private lateinit var mainViewPagerAdapter: MainViewPagerAdapter
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -76,21 +77,25 @@ class MainFragment : BaseFragmentWithBinding<FragmentMainBinding>() {
 
                 when (position) {
                     0 -> {
+                        binding.toolbar.setTitle("Trang chủ")
                         bottomNavigationView.menu.findItem(R.id.home).isChecked = true
                     }
                     1 -> {
+                        binding.toolbar.setTitle("Nghe nhạc")
                         bottomNavigationView.menu.findItem(R.id.music).isChecked = true
-
                     }
                     2 -> {
+                        binding.toolbar.setTitle("Tin nhắn")
                         bottomNavigationView.menu.findItem(R.id.message).isChecked = true
 
                     }
                     3 -> {
+                        binding.toolbar.setTitle("Thông báo")
                         bottomNavigationView.menu.findItem(R.id.notification).isChecked = true
 
                     }
                     4 -> {
+                        binding.toolbar.setTitle("Cài đặt")
                         bottomNavigationView.menu.findItem(R.id.setting).isChecked = true
                     }
                 }

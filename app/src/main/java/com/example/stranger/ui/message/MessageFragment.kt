@@ -20,38 +20,26 @@ import com.example.stranger.base.BaseFragment
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentMessageBinding
 
-class MessageFragment : BaseFragment() {
+class MessageFragment : BaseFragmentWithBinding<FragmentMessageBinding>() {
 
     companion object {
         fun newInstance() = MessageFragment()
     }
 
-    private val viewModel: MessageViewModel by viewModels()
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return context?.let {
-            ComposeView(it).apply {
-                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent {
-                    MessageScreen()
-                }
-
-            }
+    private lateinit var viewModel: MessageViewModel
+    override fun getViewBinding(inflater: LayoutInflater): FragmentMessageBinding =
+        FragmentMessageBinding.inflate(inflater).apply {
+            this.lifecycleOwner = viewLifecycleOwner
+            viewModel = ViewModelProvider(this@MessageFragment)[MessageViewModel::class.java]
         }
+
+    override fun init() {
+
     }
 
-    @Composable
-    fun MessageScreen(){
-        BottomNavigation {
-            BottomNavigationItem(false, onClick = {
-            }, alwaysShowLabel = true, icon = {
-})
-        }
-    }
+    override fun initAction() {
 
+    }
 
 
 }

@@ -25,7 +25,7 @@ class SnackBar : BaseTransientBottomBar<SnackBar> {
             @NonNull text: String,
             @Duration duration: Int, icon: Int? = null,
             action: Unit?
-        ): SnackBar {
+        ): SnackBar? {
             return makeInternal(context, view, text, duration, icon, action)
         }
 
@@ -34,7 +34,7 @@ class SnackBar : BaseTransientBottomBar<SnackBar> {
             @NonNull view: View,
             @NonNull text: String,
             @Duration duration: Int, icon: Int? = null, action: Unit? = null
-        ): SnackBar {
+        ): SnackBar? {
             val parent = findSuitableParent(view) ?: throw IllegalArgumentException(
                 "No suitable parent found from the given view. Please provide a valid view."
             )
@@ -44,7 +44,7 @@ class SnackBar : BaseTransientBottomBar<SnackBar> {
                 R.layout.custom_snackbar, parent,
                 false
             ) as CustomSnackBarContentLayout
-            val snackbar = SnackBar(context, parent, content, content)
+            val snackbar = context?.let { SnackBar(it, parent, content, content) }
             return snackbar
         }
 

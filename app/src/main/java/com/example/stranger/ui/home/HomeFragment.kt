@@ -1,11 +1,9 @@
 package com.example.stranger.ui.home
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentHomeBinding
@@ -15,17 +13,31 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragmentWithBinding<FragmentHomeBinding>() {
 
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance() : HomeFragment{
+            return HomeFragment()
+        }
     }
-    private val viewModel: HomeViewModel by viewModels()
-    private val homeAdapter = HomeAdapter(viewModel)
+
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var homeAdapter : HomeAdapter
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_home, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        R.id.search -> {
+            findNavController().navigate(R.id.action_mainFragment_to_searchHomeFragment)
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun getViewBinding(inflater: LayoutInflater): FragmentHomeBinding =
         FragmentHomeBinding.inflate(inflater).apply {
+            viewModel = ViewModelProvider(this@HomeFragment)[HomeViewModel::class.java]
+            homeAdapter = HomeAdapter(viewModel)
             this.lifecycleOwner = viewLifecycleOwner
             rvHome.setHasFixedSize(true)
             rvHome.adapter = homeAdapter
@@ -34,7 +46,6 @@ class HomeFragment : BaseFragmentWithBinding<FragmentHomeBinding>() {
     override fun init() {
 
     }
-
 
 
     override fun initAction() {

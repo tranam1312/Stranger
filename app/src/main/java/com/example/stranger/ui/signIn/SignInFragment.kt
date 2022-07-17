@@ -1,32 +1,66 @@
 package com.example.stranger.ui.signIn
 
-import android.content.res.ColorStateList
+import android.R.attr
+import android.content.ContentValues
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.stranger.R
-import com.example.stranger.databinding.FragmentSignInBinding
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.common.State
-import com.example.stranger.model.ProFile
-import com.google.android.material.snackbar.Snackbar
+import com.example.stranger.databinding.FragmentSignInBinding
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
+
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val RC_SIGN_IN = 400
+    private var mGoogleSignInClient: GoogleSignInClient? = null
 
     companion object {
         fun newInstance() = SignInFragment()
     }
 
     private val viewModel: SignInViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val signInRequest = BeginSignInRequest.builder()
+            .setGoogleIdTokenRequestOptions(
+                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                    .setSupported(true)
+                    // Your server's client ID, not your Android client ID.
+                    .setServerClientId(getString(R.string.default_web_client_id))
+                    // Only show accounts previously used to sign in.
+                    .setFilterByAuthorizedAccounts(true)
+                    .build()
+            )
+            .build();
+        val gso = signInRequest.googleIdTokenRequestOptions.serverClientId?.let {
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(it)
+                .requestEmail()
+                .build()
+        }
+        mGoogleSignInClient = gso?.let { GoogleSignIn.getClient(requireActivity(), it) };
+
+    }
 
     override fun getViewBinding(inflater: LayoutInflater): FragmentSignInBinding =
         FragmentSignInBinding.inflate(inflater).apply {
@@ -37,50 +71,105 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
     override fun initAction() {
         binding.lognIn.setOnClickListener { view -> viewModel.login() }
         binding.signUp.setOnClickListener {
-            findNavController().popBackStack(R.id.wellcomeFragment, true)
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
         binding.sigInGoogle.setOnClickListener { view ->
+            val signInIntent = mGoogleSignInClient?.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
         }
     }
 
     override fun init() {
+        getProfile()
         firebaseUser()
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+
+            firebaseAuthWithGoogle(account?.idToken.toString())
+
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information
+            Log.w(ContentValues.TAG, "signInResult:failed code=" + e.statusCode)
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    Log.d(ContentValues.TAG, "signInWithCredential:success")
+                    Toast.makeText(requireContext(), "Login ${auth.uid}", Toast.LENGTH_LONG).show()
+                    auth.uid?.let { viewModel.getFroFile(it) }
+                } else {
+                    Log.w(ContentValues.TAG, "signInWithCredential:failure", task.exception)
+                }
+            }
     }
 
     private fun firebaseUser() {
         viewModel.firebaseUser.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> binding.lognIn.visibility = View.GONE
-                is State.Success -> viewModel.getFroFile(it.data.uid)
+                is State.Loading -> {
+                    binding.lognIn.visibility = View.GONE
+                    binding.email.isEnabled = false
+                    binding.pass.isEnabled = false
+                }
+                is State.Success -> it.data?.uid?.let { user -> viewModel.getFroFile(user) }
                 is State.Error -> {
                     binding.lognIn.visibility = View.VISIBLE
-                    binding.textInputLayout.helperText = "Email ko tìm thấy"
-                    binding.textInputLayout2.helperText = "Mật khẩu sai "
+                    binding.textInputLayout.helperText = "Email không đúng"
+                    binding.textInputLayout2.helperText = "Sai mật khẩu"
+                    viewModel.hintEmailTextColor.value = true
+                    viewModel.hintPassTextColor.value = true
+                    binding.email.isEnabled = true
+                    binding.pass.isEnabled = true
                     Toast.makeText(context, it.exception, Toast.LENGTH_SHORT).show()
                     binding.lognIn.isEnabled = true
                 }
+                else -> {
+                }
             }
         }
-        getProfile()
+
     }
 
     private fun getProfile() {
         viewModel.proFile.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> binding.lognIn.visibility = View.GONE
-                is State.Success -> checkDataProfile(it.data)
+                is State.Success -> {
+                    if (it.data != null){
+                        if (it.data.name.isNullOrEmpty()) findNavController().navigate(R.id.action_signInFragment_to_newProFileFragment)
+                        else findNavController().navigate(R.id.action_signInFragment_to_mainFragment)
+                    }else findNavController().navigate(R.id.action_signInFragment_to_newProFileFragment)
+                }
+                is State.Error -> {
+                    binding.lognIn.visibility = View.VISIBLE
+                    Toast.makeText(context, it.exception, Toast.LENGTH_SHORT).show()
+                    binding.lognIn.isEnabled = true
+                }
+                else -> {
 
+                }
             }
         }
     }
 
-    fun checkDataProfile(proFile: ProFile) {
-        if (proFile.name.isNullOrEmpty())
-            findNavController().navigate(R.id.action_signInFragment_to_newProFileFragment)
-        else findNavController().navigate(R.id.action_signInFragment_to_mainFragment)
-    }
+
 
 
 }

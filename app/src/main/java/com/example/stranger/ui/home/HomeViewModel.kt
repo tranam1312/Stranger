@@ -25,6 +25,7 @@ class HomeViewModel @Inject constructor(private val repository: Repository) : Vi
                 repository.getProFile("").collect { proFile ->
                     when (proFile) {
                         is State.Success -> proFile.data?.let { _proFile.postValue(it) }
+                        else -> {}
                     }
                 }
             }

@@ -22,7 +22,7 @@ class Repository @Inject constructor(
     private var api: Api
 ) {
     var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    val firebaseDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
+    val firebaseDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("appData")
     val proFileDatabase = firebaseDatabase.child("profile")
 
 
@@ -61,11 +61,11 @@ class Repository @Inject constructor(
 
     fun getUid() : String? = firebaseAuth.uid
 
-    fun getProFile(uid: String): Flow<State<ProFile>> = callbackFlow {
+    fun getProFile(uid: String): Flow<State<ProFile?>> = callbackFlow {
         trySend(State.Loading)
         proFileDatabase.child(uid).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                trySendBlocking(Success(snapshot.getValue(ProFile::class.java)as ProFile))
+                trySendBlocking(Success(snapshot.getValue(ProFile::class.java)))
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -88,10 +88,6 @@ class Repository @Inject constructor(
             close()
         }
     }
-
-
-
-
 }
 
 

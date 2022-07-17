@@ -24,6 +24,7 @@ class WellcomeFragment : BaseFragmentWithBinding<FragmentWellcomeBinding>() {
 
     override fun init() {
         binding.signIn.setOnClickListener { view ->
+
             view.findNavController().navigate(R.id.action_wellcomeFragment_to_signInFragment)
         }
         binding.signUp.setOnClickListener { view ->

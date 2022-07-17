@@ -47,15 +47,15 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:hint="Email"
-            app:startIconDrawable="@drawable/ic_mail"
-            app:boxStrokeColor="@color/red"
+            app:boxStrokeColor="@{viewmodel.hintEmailTextColor ? @color/red : @color/black}"
             app:helperText="@{viewmodel.hintEmail}"
             app:helperTextTextColor="@color/red"
-            app:hintTextColor="@color/red"
+            app:hintTextColor="@{viewmodel.hintEmailTextColor ? @color/red : @color/black}"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_mail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
@@ -76,14 +76,15 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="24dp"
             android:hint="Password"
-            app:startIconDrawable="@drawable/ic_lock"
-            app:boxStrokeColor="@color/red"
+            app:boxStrokeColor="@{viewmodel.hintPassTextColor ? @color/red : @color/black}"
             app:helperText="@{viewmodel.hintPass}"
             app:helperTextTextColor="@color/red"
+            app:hintTextColor="@{viewmodel.hintPassTextColor ? @color/red : @color/black}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pass"
@@ -157,8 +158,8 @@
                 android:id="@+id/sigIn_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_google"
                 android:layout_marginBottom="12dp"
+                android:src="@drawable/ic_google"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -186,8 +187,8 @@
                     android:id="@+id/sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đăng ký"
                     android:padding="6dp"
+                    android:text="Đăng ký"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"

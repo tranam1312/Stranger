@@ -29,7 +29,7 @@ class HomeAdapter(
         val viewDataBinding = getViewHolderDataBinding(parent, viewType)
         return when (viewType) {
             ITEM_HEADER -> HeaderHomeViewHolder(viewModel, viewDataBinding)
-            else -> HomeViewHolder(viewDataBinding)
+            else -> HomeViewHolder(viewModel,viewDataBinding)
         }
     }
 
@@ -37,7 +37,9 @@ class HomeAdapter(
         holder: BaseViewHolder<ItemHome, ViewDataBinding>,
         position: Int
     ) {
-        holder.bind(getItem(position - 1))
+      if (currentList.size> 0){
+          holder.bind(getItem(position- 1))
+      }
     }
 
     override fun getItemCount(): Int {

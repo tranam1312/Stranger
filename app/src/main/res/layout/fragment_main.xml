@@ -8,16 +8,13 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainFragment">
 
-        <com.google.android.material.appbar.MaterialToolbar
+        <com.example.stranger.base.BaseHeader
             android:id="@+id/toolbar"
-            style="@style/Widget.Material3.AppBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="Home"
-            app:titleCentered="true" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"

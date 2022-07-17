@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
-    var email: String = Strings.EMPTY
-    var pass: String = Strings.EMPTY
+    var email: String = "admin12345@gmail.com"
+    var pass: String = "admin123456"
     var checkEmail: Boolean = false
     var checkPass: Boolean = false
     val loginEnable: ObservableBoolean = ObservableBoolean()
@@ -31,7 +31,7 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
     val hintEmailTextColor: MutableLiveData<Boolean> = MutableLiveData(false)
     val hintPassTextColor: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    private val _proFile =  SingleLiveEvent<State<ProFile>>()
+    private val _proFile =  SingleLiveEvent<State<ProFile?>>()
     val proFile get() = _proFile
 
     private var _firebaseUser = SingleLiveEvent<State<FirebaseUser>>()
@@ -55,15 +55,14 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
 
     fun checkEmail(s: String) {
         if (!s.isNullOrEmpty()) {
-            if (Pattern.matches(
-                    "[a-zA-Z_0-9]{0,1000}" + "@" + "gmail" + "\\." + "com",
-                    s
-                ) || Pattern.matches(
-                    "[a-zA-Z_0-9]{0,1000}" + "\\." + "[a-zA-Z_0-9]{0,1000}" + "@" + "gmail" + "\\." + "com",
-                    s
-                ) && !Pattern.matches("\t", s)
-            ) {
-
+//            if (Pattern.matches(
+////                    "[a-zA-Z_0-9]{0,1000}" + "@" + "gmail" + "\\." + "com",
+////                    s
+////                ) || Pattern.matches(
+////                    "[a-zA-Z_0-9]{0,1000}" + "\\." + "[a-zA-Z_0-9]{0,1000}" + "@" + "gmail" + "\\." + "com",
+////                    s
+////                ) && !Pattern.matches("\t", s)
+//            ) {
                 checkEmail = true
                 hintEmail.value = ""
                 hintEmailTextColor.value = false
@@ -71,9 +70,8 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
             } else {
                 checkEmail = false
                 hintEmailTextColor.value = true
-                hintEmail.value = "Email ko đúng định dạng "
+                hintEmail.value = "Email ko đúng định dạng"
             }
-        }
     }
 
     fun textChangedPass(editable: Editable) {
@@ -140,7 +138,7 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
                 repository.getProFile(uid).collect { proFile ->
-                    _proFile.postValue(proFile )
+                    _proFile.postValue(proFile)
                 }
             }
         }
