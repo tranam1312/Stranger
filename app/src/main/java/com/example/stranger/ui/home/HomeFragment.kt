@@ -47,7 +47,6 @@ class HomeFragment : BaseFragmentWithBinding<FragmentHomeBinding>() {
 
     }
 
-
     override fun initAction() {
 
     }

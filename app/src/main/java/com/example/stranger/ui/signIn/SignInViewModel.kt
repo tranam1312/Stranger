@@ -1,11 +1,13 @@
 package com.example.stranger.ui.signIn
 
 import android.text.Editable
+import androidx.annotation.NonNull
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stranger.common.State
+import com.example.stranger.common.succeeded
 import com.example.stranger.extension.Strings
 import com.example.stranger.model.ProFile
 import com.example.stranger.repository.Repository
@@ -31,7 +33,7 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
     val hintEmailTextColor: MutableLiveData<Boolean> = MutableLiveData(false)
     val hintPassTextColor: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    private val _proFile =  SingleLiveEvent<State<ProFile?>>()
+    private val _proFile = SingleLiveEvent<State<ProFile?>>()
     val proFile get() = _proFile
 
     private var _firebaseUser = SingleLiveEvent<State<FirebaseUser>>()
@@ -42,7 +44,7 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
             viewModelScope.launch() {
                 withContext(Dispatchers.IO) {
                     repository.login(email, pass).collect {
-                       _firebaseUser.postValue(it as State<FirebaseUser>?)
+                        _firebaseUser.postValue(it as State<FirebaseUser>?)
                     }
                 }
             }
@@ -63,15 +65,15 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
 ////                    s
 ////                ) && !Pattern.matches("\t", s)
 //            ) {
-                checkEmail = true
-                hintEmail.value = ""
-                hintEmailTextColor.value = false
-                enableLogin(checkEmail, checkPass)
-            } else {
-                checkEmail = false
-                hintEmailTextColor.value = true
-                hintEmail.value = "Email ko đúng định dạng"
-            }
+            checkEmail = true
+            hintEmail.value = ""
+            hintEmailTextColor.value = false
+            enableLogin(checkEmail, checkPass)
+        } else {
+            checkEmail = false
+            hintEmailTextColor.value = true
+            hintEmail.value = "Email ko đúng định dạng"
+        }
     }
 
     fun textChangedPass(editable: Editable) {
@@ -143,6 +145,20 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
             }
         }
     }
+
+    fun updateToken(proFile: ProFile) {
+        viewModelScope.launch {
+                repository.getUid()
+                    ?.let {
+                        repository.upDateProFile(it, proFile)
+                            .collect { proFile ->
+                                _proFile.value = proFile
+                            }
+                    }
+                }
+            }
+
+
 
 
 }

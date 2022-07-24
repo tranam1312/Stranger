@@ -1,6 +1,5 @@
 package com.example.stranger.ui.signIn
 
-import android.R.attr
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
@@ -32,6 +32,7 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val RC_SIGN_IN = 400
     private var mGoogleSignInClient: GoogleSignInClient? = null
+    private var idToken: String? = null
 
     companion object {
         fun newInstance() = SignInFragment()
@@ -128,7 +129,9 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
                     binding.email.isEnabled = false
                     binding.pass.isEnabled = false
                 }
-                is State.Success -> it.data?.uid?.let { user -> viewModel.getFroFile(user) }
+                is State.Success -> it.data?.uid?.let { user ->
+                    viewModel.getFroFile(user)
+                }
                 is State.Error -> {
                     binding.lognIn.visibility = View.VISIBLE
                     binding.textInputLayout.helperText = "Email không đúng"
@@ -144,22 +147,42 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
                 }
             }
         }
-
     }
 
     private fun getProfile() {
-        viewModel.proFile.observe(viewLifecycleOwner) {
-            when (it) {
+        viewModel.proFile.observe(viewLifecycleOwner) { profile ->
+            when (profile) {
                 is State.Loading -> binding.lognIn.visibility = View.GONE
                 is State.Success -> {
-                    if (it.data != null){
-                        if (it.data.name.isNullOrEmpty()) findNavController().navigate(R.id.action_signInFragment_to_newProFileFragment)
-                        else findNavController().navigate(R.id.action_signInFragment_to_mainFragment)
-                    }else findNavController().navigate(R.id.action_signInFragment_to_newProFileFragment)
+                    if (profile.data != null) {
+                        auth.currentUser?.getIdToken(true)?.addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                idToken = it.result.token
+                                Log.d("alo", it.result.token.toString())
+                                if (profile.data.token == it.result.token.toString() && !profile.data.token.isNullOrEmpty() && !it.result.token.isNullOrEmpty()) {
+                                    if (profile.data.name.isNullOrEmpty()) {
+                                        openHome()
+                                    } else {
+                                        openHome(true)
+                                    }
+                                } else {
+                                    auth.currentUser?.getIdToken(true)?.addOnCompleteListener {
+                                        if (it.isSuccessful) {
+                                            idToken = it.result.token
+                                            var proFile = profile.data
+                                            proFile.token = it.result.token.toString()
+                                            viewModel.updateToken(proFile)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    } else findNavController().navigate(R.id.action_signInFragment_to_newProFileFragment)
                 }
                 is State.Error -> {
                     binding.lognIn.visibility = View.VISIBLE
-                    Toast.makeText(context, it.exception, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, profile.exception, Toast.LENGTH_SHORT).show()
                     binding.lognIn.isEnabled = true
                 }
                 else -> {
@@ -169,7 +192,11 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
         }
     }
 
-
+    private fun openHome(isOpenHome: Boolean = false) {
+        if (isOpenHome)
+            view?.findNavController()?.navigate(R.id.action_signInFragment_to_mainFragment)
+        else view?.findNavController()?.navigate(R.id.action_signInFragment_to_newProFileFragment)
+    }
 
 
 }

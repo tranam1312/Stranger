@@ -35,6 +35,8 @@ class MainFragment : BaseFragmentWithBinding<FragmentMainBinding>() {
         }
 
     override fun init() {
+        binding.toolbar.setTitle("Trang chủ")
+        binding.toolbar.setIconRight(R.drawable.ic_search)
         viewPager = binding.viewPager
         mainViewPagerAdapter = MainViewPagerAdapter(
             childFragmentManager,
@@ -111,6 +113,4 @@ class MainFragment : BaseFragmentWithBinding<FragmentMainBinding>() {
     override fun initAction() {
 
     }
-
-
 }

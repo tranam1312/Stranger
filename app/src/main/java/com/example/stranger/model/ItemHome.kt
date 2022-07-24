@@ -1,13 +1,13 @@
     package com.example.stranger.model
 
 data class ItemHome(
-    val key: String = "",
-    var keyShare: String? ="",
-    val userid: String ="",
-    val userName: String = "",
-    val content: String? = "",
-    var urlList: ArrayList<String>? = arrayListOf(),
-    var listUserLike: ArrayList<String>? = arrayListOf(),
-    var listCommnent: HashMap<String, Comment>? = hashMapOf(),
-    val datetime: String? = ""
+    val key: String? = null,
+    var keyShare: String? =null,
+    val userid: String ?=null,
+    val userName: String? =null,
+    val content: String? =null,
+    var urlList: ArrayList<String>? = null,
+    var listUserLike: ArrayList<String>? =null,
+    var listCommnent: HashMap<String, Comment>? = null,
+    val datetime: String? = null
  )

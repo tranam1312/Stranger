@@ -109,7 +109,6 @@
                     style="@style/ThemeOverlay.Material3.Button.TextButton.Snackbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:layout_marginTop="@dimen/st12dp"
                     android:backgroundTint="#E8E6E6"
                     android:text="@string/cancel"

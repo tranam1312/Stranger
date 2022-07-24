@@ -10,4 +10,5 @@
     <dimen name="st3dp">3dp</dimen>
     <dimen name="st16sp">16sp</dimen>
     <dimen name="st6dp">6dp</dimen>
+    <dimen name="st4dp">4dp</dimen>
 </resources>

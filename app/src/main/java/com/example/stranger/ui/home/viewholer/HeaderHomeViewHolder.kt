@@ -1,7 +1,9 @@
 package com.example.stranger.ui.home.viewholer
 
 import androidx.databinding.ViewDataBinding
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.stranger.R
 import com.example.stranger.base.recyclerview.BaseViewHolder
 import com.example.stranger.databinding.ItemHaderHomeBinding
 import com.example.stranger.model.ItemHome
@@ -10,7 +12,7 @@ import com.example.stranger.ui.home.HomeViewModel
 
 class HeaderHomeViewHolder(
     private val homeViewModel: HomeViewModel,
-    private val binding: ViewDataBinding
+    val binding: ViewDataBinding
 ) :
     BaseViewHolder<ItemHome, ViewDataBinding>(binding) {
     fun binding() {
@@ -20,7 +22,9 @@ class HeaderHomeViewHolder(
                 homeViewModel.proFile.observe(it) {
                     binding.profile = it
                 }
+
             }
+
         }
     }
 }

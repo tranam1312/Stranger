@@ -25,7 +25,6 @@ class BindingAdapter {
                 Glide.with(view).load(it)
                     .into(view)
             }
-
         }
 
         @JvmStatic
@@ -35,7 +34,7 @@ class BindingAdapter {
                     Glide.with(view).load(url)
                         .into(view)
                 }else{
-                Glide.with(view).load(R.drawable.av)
+                Glide.with(view).load(R.drawable.q)
                     .into(view)
             }
 

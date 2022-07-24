@@ -2,8 +2,7 @@ package com.example.stranger.ui.home
 
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.recyclerview.BaseDiffUtilItemCallback
 import com.example.stranger.base.recyclerview.BaseRecyclerAdapter
@@ -29,7 +28,7 @@ class HomeAdapter(
         val viewDataBinding = getViewHolderDataBinding(parent, viewType)
         return when (viewType) {
             ITEM_HEADER -> HeaderHomeViewHolder(viewModel, viewDataBinding)
-            else -> HomeViewHolder(viewModel,viewDataBinding)
+            else -> HomeViewHolder(viewModel, viewDataBinding)
         }
     }
 
@@ -37,9 +36,19 @@ class HomeAdapter(
         holder: BaseViewHolder<ItemHome, ViewDataBinding>,
         position: Int
     ) {
-      if (currentList.size> 0){
-          holder.bind(getItem(position- 1))
-      }
+        if (holder is HeaderHomeViewHolder) {
+            (holder.binding as ItemHaderHomeBinding).profileImage.setOnClickListener {
+                holder.binding.root.findNavController()
+                    .navigate(R.id.action_mainFragment_to_proFileFragment)
+            }
+            holder.binding.text.setOnClickListener{
+                holder.binding.root.findNavController().navigate(R.id.action_mainFragment_to_postFragment)
+            }
+        } else {
+            if (currentList.size > 0) {
+                holder.bind(getItem(position - 1))
+            }
+        }
     }
 
     override fun getItemCount(): Int {

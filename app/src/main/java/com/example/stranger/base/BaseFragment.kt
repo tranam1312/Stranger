@@ -37,25 +37,14 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        getToolbar()
         return super.onCreateView(inflater, container, savedInstanceState)
 
     }
 
-    protected fun setToolbar() {
-        getToolbar()?.let {
-            (requireActivity() as AppCompatActivity).setSupportActionBar(it)
-            (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(
-                true
-            )
-        }
-    }
+
     open fun showSnackBar(message:String, duration: Int = Snackbar.LENGTH_SHORT ){
         view?.let { Snackbar.make(it,message, duration).show() }
     }
-
-
-
 
     protected fun getToolbar(): MaterialToolbar? = null
 

@@ -2,6 +2,7 @@ package com.example.stranger.common
 
 sealed class State<out R> {
     data class Success<out T>(val data: T) : State<T>()
+    data class Progress<out T>(val data: T): State<T>()
     data class Add<out T>(val data: T) : State<T>()
     data class Change<out T>(val data: T) : State<T>()
     data class Remove<out T>(val data: T) : State<T>()
@@ -14,6 +15,7 @@ sealed class State<out R> {
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
+            is Progress<*> -> "Progress[data=$data]"
             is Add<*> -> "Add[data=$data]"
             is Remove<*> -> "Remove[data=$data]"
             is Change<*> -> "Change[data=$data]"
@@ -22,6 +24,19 @@ sealed class State<out R> {
             Loading -> "Loading"
         }
     }
+
+     fun getData() {
+        return when (this) {
+            is Success<*> -> data
+            is Progress<*> -> data
+            is Add<*> -> data
+            is Remove<*> -> data
+            is Change<*> -> data
+            is Moved<*> -> data
+            else -> {}
+        } as Unit
+    }
+
 }
 
 /**

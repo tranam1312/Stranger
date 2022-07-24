@@ -1,18 +1,20 @@
 package com.example.stranger.base
 
-import android.animation.Animator
-import android.animation.ObjectAnimator
+
 import android.content.Context
+import android.graphics.drawable.AdaptiveIconDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.example.stranger.R
 import com.example.stranger.databinding.ToolbarBinding
 
 class BaseHeader : ConstraintLayout {
-    private var binding: ToolbarBinding? = null
+    var binding: ToolbarBinding? = null
 
     constructor(context: Context) : super(context) {
         initView()
@@ -45,24 +47,40 @@ class BaseHeader : ConstraintLayout {
         addView(binding?.root)
     }
 
-    fun setTitle(title: String) {
-        endTitleAnimation()
-        binding?.title?.text = title
-        startTitleAnia()
+     fun setTitle(title: String) {
+        binding?.title?.viewTreeObserver.apply {
+            endTitleAnimation()
+            android.os.Handler().postDelayed(Runnable {
+                binding?.title?.text = title
+                startTitleAnia()
+            }, 300)
+        }
+
     }
 
-    fun startTitleAnia() {
+    private fun startTitleAnia() {
         val animation = AnimationUtils.loadAnimation(context, R.anim.text_view_tranlate_end).apply {
-            duration = 1000
+            duration = 300
             start()
         }
         binding?.title?.startAnimation(animation)
     }
-    fun endTitleAnimation(){
+
+    private fun endTitleAnimation(){
         val animation = AnimationUtils.loadAnimation(context, R.anim.text_view_tranlate_strat).apply {
-            duration = 1000
+            duration = 300
             start()
         }
         binding?.title?.startAnimation(animation)
+    }
+
+    fun setIconRight(icon: Int){
+        binding?.iconRightId?.setBackgroundResource(icon)
+    }
+    fun setIconLeft(icon: Int){
+        binding?.iconLeftId?.setBackgroundResource(icon)
+    }
+    fun setOnClickButtonRight(onClick: ((View) ->Unit )){
+        binding?.buttonRight?.setOnClickListener (onClick)
     }
 }

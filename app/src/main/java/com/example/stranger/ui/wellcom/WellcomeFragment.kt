@@ -1,6 +1,7 @@
 package com.example.stranger.ui.wellcom
 
 
+import android.os.Handler
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -16,24 +17,25 @@ class WellcomeFragment : BaseFragmentWithBinding<FragmentWellcomeBinding>() {
         fun newInstance() = WellcomeFragment()
     }
 
-    private val viewModel : WellcomeViewModel by viewModels()
+    private val viewModel: WellcomeViewModel by viewModels()
 
     override fun getViewBinding(inflater: LayoutInflater): FragmentWellcomeBinding =
-       FragmentWellcomeBinding.inflate(inflater)
+        FragmentWellcomeBinding.inflate(inflater)
             .apply { lifecycleOwner = viewLifecycleOwner }
 
     override fun init() {
-        binding.signIn.setOnClickListener { view ->
+        Handler().postDelayed({
 
+        }, 200L)
+    }
+
+    override fun initAction() {
+        binding.signIn.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_wellcomeFragment_to_signInFragment)
         }
         binding.signUp.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_wellcomeFragment_to_signUpFragment)
         }
-    }
-
-    override fun initAction() {
-//        TODO("Not yet implemented")
     }
 
 }

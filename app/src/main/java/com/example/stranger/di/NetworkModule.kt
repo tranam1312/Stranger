@@ -1,14 +1,13 @@
 package com.example.stranger.di
 
+import com.example.stranger.api.Api
 import com.google.gson.GsonBuilder
-import com.example.stranger.Service.Api
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)

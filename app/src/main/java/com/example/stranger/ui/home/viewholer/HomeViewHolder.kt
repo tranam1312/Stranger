@@ -10,7 +10,7 @@ import com.example.stranger.ui.home.HomeViewModel
 
 class HomeViewHolder (private val homeViewModel: HomeViewModel,private val binding: ViewDataBinding) :BaseViewHolder<ItemHome,ViewDataBinding>(binding) {
     fun binding() {
-        if (binding is ItemPostBinding ) {
+        if (binding is ItemPostBinding ){
 
         }
         }
