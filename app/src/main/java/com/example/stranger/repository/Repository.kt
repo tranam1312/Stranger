@@ -1,6 +1,5 @@
 package com.example.stranger.repository
 
-import android.content.ClipData
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.stranger.common.State
@@ -18,10 +17,11 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Repository{
+class Repository @Inject constructor(){
     var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val firebaseDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("appData")
     val proFileDatabase = firebaseDatabase.child("profile")
@@ -51,6 +51,7 @@ class Repository{
             close()
         }
     }
+
     fun signUp(email: String, password: String): Flow<State<FirebaseUser?>> = callbackFlow {
         trySend(State.Loading)
         val onCompleteListener = OnCompleteListener<AuthResult> {
@@ -97,23 +98,22 @@ class Repository{
         }
     }
 
-    fun upLoadAnh(data: ByteArray,key: String): Flow<State<String>> = callbackFlow{
-        val storage: StorageReference = storageRef.reference.child("${firebaseAuth.currentUser?.uid}").child(
-            key)
-        uploadTask = storage.putBytes(data)
+    fun upLoadAnh(data: ByteArray?, key: String): Flow<State<String>> = callbackFlow {
+        val storage: StorageReference =
+            storageRef.reference.child("${firebaseAuth.currentUser?.uid}").child(
+                key
+            )
+        uploadTask = storage.putBytes(data!!)
         uploadTask.addOnFailureListener {
             trySendBlocking(State.Error(it.message.toString()))
         }.addOnProgressListener {
-            val progress : Int = ((100.0 * it.bytesTransferred) / it.totalByteCount).toInt()
+            val progress: Int = ((100.0 * it.bytesTransferred) / it.totalByteCount).toInt()
             trySendBlocking(State.Progress(progress.toString()))
         }.addOnSuccessListener {
             storage.downloadUrl.addOnCompleteListener { task ->
                 trySendBlocking(Success(task.result.toString()))
             }
         }
-    }
-    fun postItemHome():Flow<State<{
-
     }
 }
 
