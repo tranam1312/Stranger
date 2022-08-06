@@ -30,11 +30,11 @@ class WellcomeFragment : BaseFragmentWithBinding<FragmentWellcomeBinding>() {
     }
 
     override fun initAction() {
-        binding.signIn.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_wellcomeFragment_to_signInFragment)
+        binding.signIn.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_wellcomeFragment_to_signInFragment)
         }
-        binding.signUp.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_wellcomeFragment_to_signUpFragment)
+        binding.signUp.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_wellcomeFragment_to_signUpFragment)
         }
     }
 

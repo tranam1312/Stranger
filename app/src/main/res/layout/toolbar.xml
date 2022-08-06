@@ -81,7 +81,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:textStyle="bold"
-                android:enabled="false"
                 android:visibility="gone"
                 app:cornerRadius="@dimen/st4dp"
                 app:layout_constraintBottom_toBottomOf="parent"

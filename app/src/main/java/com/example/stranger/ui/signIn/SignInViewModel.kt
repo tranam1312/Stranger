@@ -69,6 +69,8 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
             hintEmail.value = ""
             hintEmailTextColor.value = false
             enableLogin(checkEmail, checkPass)
+
+
         } else {
             checkEmail = false
             hintEmailTextColor.value = true

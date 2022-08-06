@@ -22,10 +22,14 @@ class HomeViewModel @Inject constructor(private val repository: Repository) : Vi
     fun getFroFile() {
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
-                repository.getProFile("").collect { proFile ->
-                    when (proFile) {
-                        is State.Success -> proFile.data?.let { _proFile.postValue(it) }
-                        else -> {}
+                repository.getUid()?.let {
+                    repository.getProFile(it).collect { proFile ->
+                        when (proFile) {
+                            is State.Success -> proFile.data?.let { _proFile.postValue(it) }
+                            else -> {
+
+                            }
+                        }
                     }
                 }
             }

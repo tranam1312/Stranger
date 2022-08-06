@@ -100,9 +100,7 @@ class Repository @Inject constructor(){
 
     fun upLoadAnh(data: ByteArray?, key: String): Flow<State<String>> = callbackFlow {
         val storage: StorageReference =
-            storageRef.reference.child("${firebaseAuth.currentUser?.uid}").child(
-                key
-            )
+            storageRef.reference.child("${firebaseAuth.currentUser?.uid}").child(key)
         uploadTask = storage.putBytes(data!!)
         uploadTask.addOnFailureListener {
             trySendBlocking(State.Error(it.message.toString()))
@@ -113,6 +111,10 @@ class Repository @Inject constructor(){
             storage.downloadUrl.addOnCompleteListener { task ->
                 trySendBlocking(Success(task.result.toString()))
             }
+        }
+
+        awaitClose {
+            close()
         }
     }
 }

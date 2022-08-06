@@ -6,10 +6,13 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Bundle
+import android.os.Parcelable
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.stranger.R
@@ -21,6 +24,7 @@ import com.example.stranger.ui.newProFile.NewProFileFragment
 import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
+import java.util.ArrayList
 
 @AndroidEntryPoint
 class PostFragment : BaseFragmentWithBinding<FragmentPostBinding>() {
@@ -65,12 +69,13 @@ class PostFragment : BaseFragmentWithBinding<FragmentPostBinding>() {
             binding.imageView.buildDrawingCache()
             val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
             val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos)
             val data = baos.toByteArray()
+
             var intent = Intent(context,PostService::class.java)
             intent.putExtra("image",data)
-            intent.putExtra("content", binding.appCompatEditText.text)
-            requireActivity().applicationContext.startForegroundService(intent)
+            intent.putExtra("content",binding.appCompatEditText.text.toString())
+            startForegroundService(requireContext().applicationContext,intent)
         }
 
     }
@@ -126,12 +131,12 @@ class PostFragment : BaseFragmentWithBinding<FragmentPostBinding>() {
                     Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 startActivityForResult(photoPickerIntent, NewProFileFragment.REQUEST_IMAGE_CAPTURE)
             }
+
             NewProFileFragment.CAMERA_PIC_REQUEST -> {
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(cameraIntent, NewProFileFragment.CAMERA_PIC_REQUEST)
             }
         }
     }
-
-
+    
 }

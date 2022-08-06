@@ -7,4 +7,6 @@
     <string name="camera">Camera</string>
     <string name="library">Thư viện ảnh</string>
     <string name="cancel">Hủy bỏ</string>
+    <string name="post_notifi">post notification</string>
+    <string name="channel_post_notifi">thông báo post notification</string>
 </resources>

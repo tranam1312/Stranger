@@ -25,7 +25,7 @@ class ProFileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProFileViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ProFileViewModel::class.java]
 
     }
 
