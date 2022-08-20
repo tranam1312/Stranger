@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.stranger.common.State
 import com.example.stranger.common.State.Success
+import com.example.stranger.model.ItemHome
 import com.example.stranger.model.ProFile
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
@@ -24,6 +25,7 @@ import javax.inject.Singleton
 class Repository @Inject constructor(){
     var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val firebaseDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("appData")
+    val home: DatabaseReference = firebaseDatabase.child("Home")
     val proFileDatabase = firebaseDatabase.child("profile")
     val storageRef = FirebaseStorage.getInstance()
     private lateinit var uploadTask : UploadTask
@@ -112,11 +114,22 @@ class Repository @Inject constructor(){
                 trySendBlocking(Success(task.result.toString()))
             }
         }
-
         awaitClose {
             close()
         }
     }
+    fun upLoadContentPosts(itemHome: ItemHome): Flow<State<ItemHome>> = callbackFlow {
+        trySend(State.Loading)
+        home.child(itemHome.key.toString()).setValue(itemHome).addOnCompleteListener {
+            trySendBlocking(Success(itemHome))
+        }.addOnFailureListener {
+            trySendBlocking(State.Error(it.message.toString()))
+        }
+        awaitClose {
+            close()
+        }
+    }
+
 }
 
 

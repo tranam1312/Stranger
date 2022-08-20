@@ -1,13 +1,13 @@
 package com.example.stranger.ui.wellcom
 
 
-import android.os.Handler
 import android.view.LayoutInflater
-import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentWellcomeBinding
+import com.example.stranger.ui.main.MainFragment
+import com.example.stranger.ui.signIn.SignInFragment
+import com.example.stranger.ui.signUp.SignUpFragment
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,25 +17,30 @@ class WellcomeFragment : BaseFragmentWithBinding<FragmentWellcomeBinding>() {
         fun newInstance() = WellcomeFragment()
     }
 
-    private val viewModel: WellcomeViewModel by viewModels()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
 
     override fun getViewBinding(inflater: LayoutInflater): FragmentWellcomeBinding =
         FragmentWellcomeBinding.inflate(inflater)
             .apply { lifecycleOwner = viewLifecycleOwner }
 
     override fun init() {
-        Handler().postDelayed({
-
-        }, 200L)
+        if (!auth.currentUser?.uid.isNullOrEmpty())
+            splashActivity.replaceFragmentNoBack(MainFragment.newInstance())
     }
 
     override fun initAction() {
         binding.signIn.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_wellcomeFragment_to_signInFragment)
+            splashActivity.replaceFragment(
+                SignInFragment.newInstance(),
+                SignInFragment::class.java.name
+            )
         }
         binding.signUp.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_wellcomeFragment_to_signUpFragment)
+            splashActivity.replaceFragment(
+                SignUpFragment.newInstance(),
+                SignInFragment::class.java.name
+            )
         }
     }
-
 }

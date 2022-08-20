@@ -7,6 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentHomeBinding
+import com.example.stranger.ui.home.post.PostFragment
+import com.example.stranger.ui.home.searchHome.SearchHomeFragment
+import com.example.stranger.ui.setting.profile.ProFileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +19,8 @@ class HomeFragment : BaseFragmentWithBinding<FragmentHomeBinding>() {
         fun newInstance() : HomeFragment{
             return HomeFragment()
         }
+        const val OPEN_POST = "OPEN_POST"
+        const val OPEN_PROFILE ="OPEN_PROFILE"
     }
 
     private lateinit var viewModel: HomeViewModel
@@ -28,7 +33,7 @@ class HomeFragment : BaseFragmentWithBinding<FragmentHomeBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.search -> {
-            findNavController().navigate(R.id.action_mainFragment_to_searchHomeFragment)
+            splashActivity.addFragment(SearchHomeFragment.newInstance(), SearchHomeFragment::class.java.name)
             true
         }
         else -> super.onOptionsItemSelected(item)
@@ -37,11 +42,19 @@ class HomeFragment : BaseFragmentWithBinding<FragmentHomeBinding>() {
     override fun getViewBinding(inflater: LayoutInflater): FragmentHomeBinding =
         FragmentHomeBinding.inflate(inflater).apply {
             viewModel = ViewModelProvider(this@HomeFragment)[HomeViewModel::class.java]
-            homeAdapter = HomeAdapter(viewModel)
+            homeAdapter = HomeAdapter(viewModel, openFragment)
             this.lifecycleOwner = viewLifecycleOwner
             rvHome.setHasFixedSize(true)
             rvHome.adapter = homeAdapter
         }
+
+
+    private val openFragment : (String) -> Unit = {
+        when(it){
+            OPEN_POST -> splashActivity.addFragment(PostFragment.newInstance(), PostFragment::class.java.name)
+            OPEN_PROFILE ->  splashActivity.addFragment(ProFileFragment.newInstance(), ProFileFragment::class.java.name)
+        }
+    }
 
     override fun init() {
 

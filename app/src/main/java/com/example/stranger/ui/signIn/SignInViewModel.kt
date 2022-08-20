@@ -150,17 +150,15 @@ class SignInViewModel @Inject constructor(private val repository: Repository) : 
 
     fun updateToken(proFile: ProFile) {
         viewModelScope.launch {
-                repository.getUid()
-                    ?.let {
-                        repository.upDateProFile(it, proFile)
-                            .collect { proFile ->
-                                _proFile.value = proFile
-                            }
-                    }
+            repository.getUid()
+                ?.let {
+                    repository.upDateProFile(it, proFile)
+                        .collect { proFile ->
+                            _proFile.value = proFile
+                        }
                 }
-            }
-
-
+        }
+    }
 
 
 }

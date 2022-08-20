@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/activity_splash.xml" value="0.35052083333333334" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_post.xml" value="0.1734375" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_sign_in.xml" value="0.35052083333333334" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_sign_up.xml" value="0.35052083333333334" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/toolbar.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/anhna/.gradle/caches/transforms-3/bb4e7f6d3ab2b6f6dabcacfbf192a226/transformed/core-1.7.0/res/drawable-v21/notification_action_background.xml" value="0.274" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/back_ground_corner_radius_libery.xml" value="0.1" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/background_card.xml" value="0.108" />

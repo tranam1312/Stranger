@@ -3,17 +3,19 @@ package com.example.stranger.ui.signIn
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.common.State
 import com.example.stranger.databinding.FragmentSignInBinding
+import com.example.stranger.ui.main.MainFragment
+import com.example.stranger.ui.newProFile.NewProFileFragment
+import com.example.stranger.ui.signUp.SignUpFragment
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -50,6 +52,7 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
                     .setServerClientId(getString(R.string.default_web_client_id))
                     // Only show accounts previously used to sign in.
                     .setFilterByAuthorizedAccounts(true)
+
                     .build()
             )
             .build();
@@ -59,8 +62,7 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
                 .requestEmail()
                 .build()
         }
-        mGoogleSignInClient = gso?.let { GoogleSignIn.getClient(requireActivity(), it) };
-
+        mGoogleSignInClient = gso?.let { GoogleSignIn.getClient(requireActivity(), it) }
     }
 
     override fun getViewBinding(inflater: LayoutInflater): FragmentSignInBinding =
@@ -72,7 +74,10 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
     override fun initAction() {
         binding.lognIn.setOnClickListener { view -> viewModel.login() }
         binding.signUp.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+            splashActivity.replaceFragment(
+                SignUpFragment.newInstance(),
+                SignUpFragment::class.java.name
+            )
         }
         binding.sigInGoogle.setOnClickListener { view ->
             val signInIntent = mGoogleSignInClient?.signInIntent
@@ -97,7 +102,6 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-
             firebaseAuthWithGoogle(account?.idToken.toString())
 
         } catch (e: ApiException) {
@@ -178,7 +182,10 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
                             }
                         }
 
-                    } else findNavController().navigate(R.id.action_signInFragment_to_newProFileFragment)
+                    } else {
+                        splashActivity.replaceFragmentNoBack(NewProFileFragment.newInstance())
+                        splashActivity.removeFragment()
+                    }
                 }
                 is State.Error -> {
                     binding.lognIn.visibility = View.VISIBLE
@@ -193,10 +200,12 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
     }
 
     private fun openHome(isOpenHome: Boolean = false) {
-        if (isOpenHome)
-            view?.findNavController()?.navigate(R.id.action_signInFragment_to_mainFragment)
-        else view?.findNavController()?.navigate(R.id.action_signInFragment_to_newProFileFragment)
+        if (isOpenHome) {
+            splashActivity.replaceFragmentNoBack(MainFragment.newInstance())
+            splashActivity.removeFragment()
+        } else {
+            splashActivity.replaceFragmentNoBack(NewProFileFragment.newInstance())
+            splashActivity.removeFragment()
+        }
     }
-
-
 }

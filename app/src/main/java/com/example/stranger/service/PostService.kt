@@ -11,6 +11,7 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.stranger.R
 import com.example.stranger.common.State
+import com.example.stranger.model.ItemHome
 import com.example.stranger.repository.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,10 +23,11 @@ class PostService : Service() {
     private val scope = CoroutineScope(Job() + Dispatchers.IO)
     private val CHANNEL_ID = "POST_NOTIFICATION"
     private val repository: Repository = Repository()
+    private var content : String? = null
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         val bitmap = intent.extras?.get("image")
-        val content = intent.extras?.get("content")
+        content = intent.extras?.get("content") as String?
 
         startForeground(10, build(bitmap as ByteArray).build())
         return START_STICKY
@@ -62,13 +64,13 @@ class PostService : Service() {
         return builder
     }
 
-    fun upAnh(data: ByteArray, build: NotificationCompat.Builder) {
+    private  fun upAnh(data: ByteArray, build: NotificationCompat.Builder) {
         build.setContentTitle("Đang tạo bài viết")
         scope.launch {
             repository.upLoadAnh(data, repository.getKey()).collect {
                 when (it) {
                     is State.Success -> {
-                        build.setContentTitle("Đã tải lên hoàn tất")
+                        newPost(url = it.toString())
                     }
                     is State.Progress -> {
                         build.setContentText("Đâng tạo ${it.data} %")
@@ -84,6 +86,10 @@ class PostService : Service() {
                 }
             }
         }
+    }
+
+    private fun newPost(url:String){
+        val itemHome = ItemHome(repository.getKey(),null,repository.getUid(),content,url, null, null, )
     }
 
     override fun onDestroy() {

@@ -20,6 +20,7 @@ import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentPostBinding
 import com.example.stranger.service.PostService
 import com.example.stranger.ui.Dialog.OpenLibraryDialog
+import com.example.stranger.ui.SplashActivity
 import com.example.stranger.ui.newProFile.NewProFileFragment
 import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,17 +43,17 @@ class PostFragment : BaseFragmentWithBinding<FragmentPostBinding>() {
             viewmodel = viewModel
         }
 
-    override fun init() {
+    override fun setToolBar(activity: SplashActivity) {
         binding.toolbar.apply {
             setTitle("Tạo bài viết")
             setIconLeft(R.drawable.ic_arrow_left)
-            binding?.iconLeftId?.setOnClickListener {
-                findNavController().popBackStack()
-                binding?.buttonRight?.visibility = View.GONE
-            }
-            binding?.buttonRight?.text = "Đăng"
-            binding?.buttonRight?.visibility = View.VISIBLE
+            onBackPressed(activity)
+            setTextRight("Đăng")
         }
+    }
+
+    override fun init() {
+
     }
 
     override fun initAction() {
@@ -76,6 +77,7 @@ class PostFragment : BaseFragmentWithBinding<FragmentPostBinding>() {
             intent.putExtra("image",data)
             intent.putExtra("content",binding.appCompatEditText.text.toString())
             startForegroundService(requireContext().applicationContext,intent)
+            finish()
         }
 
     }

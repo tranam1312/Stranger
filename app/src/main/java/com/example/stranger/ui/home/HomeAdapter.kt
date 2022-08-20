@@ -2,18 +2,19 @@ package com.example.stranger.ui.home
 
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.navigation.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.recyclerview.BaseDiffUtilItemCallback
 import com.example.stranger.base.recyclerview.BaseRecyclerAdapter
 import com.example.stranger.base.recyclerview.BaseViewHolder
 import com.example.stranger.databinding.ItemHaderHomeBinding
 import com.example.stranger.model.ItemHome
+import com.example.stranger.ui.home.HomeFragment.Companion.OPEN_POST
+import com.example.stranger.ui.home.HomeFragment.Companion.OPEN_PROFILE
 import com.example.stranger.ui.home.viewholer.HeaderHomeViewHolder
 import com.example.stranger.ui.home.viewholer.HomeViewHolder
 
 class HomeAdapter(
-    private val viewModel: HomeViewModel
+    private val viewModel: HomeViewModel,private val openFragment: (String) -> Unit
 ) : BaseRecyclerAdapter<ItemHome, BaseViewHolder<ItemHome, ViewDataBinding>>(ItemDiffUtilCallback()) {
 
     companion object {
@@ -38,11 +39,10 @@ class HomeAdapter(
     ) {
         if (holder is HeaderHomeViewHolder) {
             (holder.binding as ItemHaderHomeBinding).profileImage.setOnClickListener {
-                holder.binding.root.findNavController()
-                    .navigate(R.id.action_mainFragment_to_proFileFragment)
+               openFragment.invoke(OPEN_PROFILE)
             }
             holder.binding.text.setOnClickListener{
-                holder.binding.root.findNavController().navigate(R.id.action_mainFragment_to_postFragment)
+                openFragment.invoke(OPEN_POST)
             }
         } else {
             if (currentList.size > 0) {

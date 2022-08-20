@@ -4,9 +4,10 @@ plugins {
     id 'com.google.gms.google-services'
 }
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-parcelize'
-apply plugin: 'kotlin-kapt'
+
 
 
 android {
@@ -101,6 +102,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
 
     // glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'

@@ -18,7 +18,7 @@ data class ProFile(
     val maritalStatus: String? =null,
     val imgUrlAvatar: String? = null,
     val marriageStatus: String? = null,
-    val keyPost: HashMap<String, String>? =null,
+    val listPost: HashMap<String, ItemHome>? =null,
     val listImg: HashMap<String, String>? = null,
     val message: ArrayList<String>? = null,
     val groupMessage: ArrayList<String>? = null,

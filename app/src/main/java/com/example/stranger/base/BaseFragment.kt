@@ -1,35 +1,19 @@
 package com.example.stranger.base
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Message
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Snackbar
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.ui.Modifier
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.snackbar.Snackbar
-
+import com.example.stranger.local.Preferences
+import com.example.stranger.ui.SplashActivity
 
 
 abstract class BaseFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home -> {
-            findNavController().popBackStack()
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
+    protected lateinit var splashActivity: SplashActivity
+    protected val preferences: Preferences by lazy {
+        Preferences.getInstance(requireContext())
     }
 
     override fun onCreateView(
@@ -37,15 +21,28 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        splashActivity = activity as SplashActivity
+        setToolBar(splashActivity)
+        init()
+        initAction()
+    }
+
+    open fun setToolBar(activity: SplashActivity) {
 
     }
 
+    abstract fun init()
+    abstract fun initAction()
 
-    open fun showSnackBar(message:String, duration: Int = Snackbar.LENGTH_SHORT ){
-        view?.let { Snackbar.make(it,message, duration).show() }
+    fun finish() {
+        requireActivity().finish()
     }
 
-    protected fun getToolbar(): MaterialToolbar? = null
 
 }

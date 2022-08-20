@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.stranger.R
 import com.example.stranger.databinding.ToolbarBinding
+import com.example.stranger.ui.SplashActivity
 
 class BaseHeader : ConstraintLayout {
     var binding: ToolbarBinding? = null
@@ -83,4 +84,20 @@ class BaseHeader : ConstraintLayout {
     fun setOnClickButtonRight(onClick: ((View) ->Unit )){
         binding?.buttonRight?.setOnClickListener (onClick)
     }
+    fun onBackPressed(activity: SplashActivity,onClick: ((View) ->Unit )? = null){
+        binding?.iconLeftId?.setOnClickListener {
+            activity.onBackPressed()
+            binding?.buttonRight?.visibility = View.GONE
+            onClick?.invoke(rootView)
+        }
+    }
+    fun setTextRight(title: String? = null){
+        binding?.buttonRight?.text = title
+        visibleButtonRight(!title.isNullOrEmpty())
+    }
+
+    fun visibleButtonRight(isVisible :Boolean = false){
+        binding?.buttonRight?.visibility =  if (isVisible) View.VISIBLE else View.GONE
+    }
+
 }

@@ -5,26 +5,15 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.get
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.example.stranger.R
-import com.example.stranger.base.BaseFragment
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.common.State
-import com.example.stranger.common.succeeded
 import com.example.stranger.databinding.FragmentNewProFileBinding
 import com.example.stranger.ui.Dialog.OpenLibraryDialog
+import com.example.stranger.ui.main.MainFragment
 import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -84,10 +73,9 @@ class NewProFileFragment : BaseFragmentWithBinding<FragmentNewProFileBinding>() 
         viewModel.proFile.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> binding.buttonConfrim.isEnabled = false
-                is State.Success -> findNavController().navigate(R.id.action_newProFileFragment_to_mainFragment)
+                is State.Success -> splashActivity.replaceFragmentNoBack(MainFragment.newInstance())
                 is State.Error -> {
                     binding.buttonConfrim.isEnabled = false
-                    showSnackBar(it.exception)
                 }
                 else -> {}
             }
