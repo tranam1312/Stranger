@@ -3,7 +3,6 @@ package com.example.stranger.ui.signIn
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +54,7 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
 
                     .build()
             )
-            .build();
+            .build()
         val gso = signInRequest.googleIdTokenRequestOptions.serverClientId?.let {
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(it)
@@ -72,9 +71,9 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
         }
 
     override fun initAction() {
-        binding.lognIn.setOnClickListener { view -> viewModel.login() }
+        binding.lognIn.setOnClickListener {  viewModel.login() }
         binding.signUp.setOnClickListener {
-            splashActivity.replaceFragment(
+            splashActivity.addFragment(
                 SignUpFragment.newInstance(),
                 SignUpFragment::class.java.name
             )
@@ -88,7 +87,6 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
     override fun init() {
         getProfile()
         firebaseUser()
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -133,7 +131,7 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
                     binding.email.isEnabled = false
                     binding.pass.isEnabled = false
                 }
-                is State.Success -> it.data?.uid?.let { user ->
+                is State.Success -> it.data.uid.let { user ->
                     viewModel.getFroFile(user)
                 }
                 is State.Error -> {
@@ -182,10 +180,7 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
                             }
                         }
 
-                    } else {
-                        splashActivity.replaceFragmentNoBack(NewProFileFragment.newInstance())
-                        splashActivity.removeFragment()
-                    }
+                    } else openHome()
                 }
                 is State.Error -> {
                     binding.lognIn.visibility = View.VISIBLE
@@ -196,16 +191,15 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
 
                 }
             }
+
         }
     }
 
     private fun openHome(isOpenHome: Boolean = false) {
         if (isOpenHome) {
-            splashActivity.replaceFragmentNoBack(MainFragment.newInstance())
-            splashActivity.removeFragment()
+            replaceFragment(MainFragment.newInstance(), MainFragment::class.java.name)
         } else {
-            splashActivity.replaceFragmentNoBack(NewProFileFragment.newInstance())
-            splashActivity.removeFragment()
+            replaceFragment(NewProFileFragment.newInstance(), NewProFileFragment::class.java.name)
         }
     }
 }

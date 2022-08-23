@@ -23,7 +23,7 @@ abstract class BaseRecyclerAdapter<T : Any, VH : BaseViewHolder<T,ViewDataBindin
         holder.bind(getItem(position))
     }
 
-    override fun submitList(list: MutableList<T>?) {
+    override fun submitList(list: List<T>?) {
             super.submitList(list ?: emptyList())
     }
 

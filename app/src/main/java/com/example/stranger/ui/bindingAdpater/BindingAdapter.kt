@@ -20,25 +20,16 @@ class BindingAdapter {
 
         @JvmStatic
         @androidx.databinding.BindingAdapter("app:url")
-        fun setImageUrl(view: ImageFilterView, url: String) {
-            url?.let {
-                Glide.with(view).load(it)
-                    .into(view)
-            }
+        fun setImageUrl(view: ImageFilterView, url: String?) {
+            Glide.with(view).load(url ?: R.drawable.af)
+                .into(view)
         }
 
         @JvmStatic
         @androidx.databinding.BindingAdapter("app:url")
         fun setImageUrl(view: ShapeableImageView, url: String?) {
-            if (url!= null){
-                    Glide.with(view).load(url)
-                        .into(view)
-                }else{
-                Glide.with(view).load(R.drawable.q)
+                Glide.with(view).load(url ?: R.drawable.af)
                     .into(view)
-            }
-
-
 
         }
 

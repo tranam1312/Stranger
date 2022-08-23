@@ -14,36 +14,41 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import com.google.gson.Gson
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import java.util.stream.Collectors
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
-class Repository @Inject constructor(){
+class Repository @Inject constructor() {
     var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    val firebaseDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("appData")
+    val firebaseDatabase: DatabaseReference =
+        FirebaseDatabase.getInstance().reference.child("appData")
     val home: DatabaseReference = firebaseDatabase.child("Home")
     val proFileDatabase = firebaseDatabase.child("profile")
     val storageRef = FirebaseStorage.getInstance()
-    private lateinit var uploadTask : UploadTask
+    private lateinit var uploadTask: UploadTask
 
     fun getUser(): FirebaseUser? {
         return firebaseAuth.currentUser
     }
-    fun getKey():String{
+
+    fun getKey(): String {
         return firebaseDatabase.push().key.toString()
     }
 
     fun login(email: String, password: String): Flow<State<FirebaseUser?>> = callbackFlow {
         trySend(State.Loading)
 
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
-            if(it.isSuccessful){
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+            if (it.isSuccessful) {
                 trySendBlocking(Success(firebaseAuth.currentUser))
-            }else {
+            } else {
                 trySendBlocking(State.Error(it.exception?.message.toString()))
             }
         }.addOnFailureListener {
@@ -64,17 +69,18 @@ class Repository @Inject constructor(){
                 Log.d(TAG, "login: fales")
             }
         }
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(onCompleteListener)
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(onCompleteListener)
         awaitClose {
             close()
         }
     }
 
-    fun getUid() : String? = firebaseAuth.uid
+    fun getUid(): String? = firebaseAuth.uid
 
     fun getProFile(uid: String): Flow<State<ProFile?>> = callbackFlow {
         trySend(State.Loading)
-        proFileDatabase.child(uid).addValueEventListener(object : ValueEventListener{
+        proFileDatabase.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 trySendBlocking(Success(snapshot.getValue(ProFile::class.java)))
             }
@@ -88,14 +94,15 @@ class Repository @Inject constructor(){
             close()
         }
     }
-    fun upDateProFile(uid: String, proFile: ProFile) : Flow<State<ProFile>> = callbackFlow {
+
+    fun upDateProFile(uid: String, proFile: ProFile): Flow<State<ProFile>> = callbackFlow {
         trySend(State.Loading)
-        proFileDatabase.child(uid).setValue(proFile).addOnCompleteListener{
+        proFileDatabase.child(uid).setValue(proFile).addOnCompleteListener {
             trySendBlocking(Success(proFile))
         }.addOnFailureListener {
             trySendBlocking(State.Error(it.message.toString()))
         }
-        awaitClose{
+        awaitClose {
             close()
         }
     }
@@ -118,6 +125,7 @@ class Repository @Inject constructor(){
             close()
         }
     }
+
     fun upLoadContentPosts(itemHome: ItemHome): Flow<State<ItemHome>> = callbackFlow {
         trySend(State.Loading)
         home.child(itemHome.key.toString()).setValue(itemHome).addOnCompleteListener {
@@ -130,6 +138,22 @@ class Repository @Inject constructor(){
         }
     }
 
+    fun getDataHome(): Flow<State<List<ItemHome>>> = callbackFlow {
+        trySend(State.Loading)
+        home.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var listItemHome: List<ItemHome> = (snapshot.value as HashMap<String, ItemHome>).values.stream().collect(Collectors.toList())
+                trySendBlocking(Success(listItemHome))
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                trySendBlocking(State.Error(error.message))
+            }
+        })
+        awaitClose {
+            close()
+        }
+    }
+
 }
-
-

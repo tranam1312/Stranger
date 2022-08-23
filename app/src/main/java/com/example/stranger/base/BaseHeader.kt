@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
@@ -84,7 +85,7 @@ class BaseHeader : ConstraintLayout {
     fun setOnClickButtonRight(onClick: ((View) ->Unit )){
         binding?.buttonRight?.setOnClickListener (onClick)
     }
-    fun onBackPressed(activity: SplashActivity,onClick: ((View) ->Unit )? = null){
+    fun onBackPressed(activity: AppCompatActivity,onClick: ((View) ->Unit )? = null){
         binding?.iconLeftId?.setOnClickListener {
             activity.onBackPressed()
             binding?.buttonRight?.visibility = View.GONE

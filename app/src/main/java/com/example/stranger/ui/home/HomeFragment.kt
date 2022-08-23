@@ -1,12 +1,17 @@
 package com.example.stranger.ui.home
 
-import android.view.*
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentHomeBinding
+import com.example.stranger.model.ItemHome
 import com.example.stranger.ui.home.post.PostFragment
 import com.example.stranger.ui.home.searchHome.SearchHomeFragment
 import com.example.stranger.ui.setting.profile.ProFileFragment
@@ -48,7 +53,6 @@ class HomeFragment : BaseFragmentWithBinding<FragmentHomeBinding>() {
             rvHome.adapter = homeAdapter
         }
 
-
     private val openFragment : (String) -> Unit = {
         when(it){
             OPEN_POST -> splashActivity.addFragment(PostFragment.newInstance(), PostFragment::class.java.name)
@@ -57,7 +61,13 @@ class HomeFragment : BaseFragmentWithBinding<FragmentHomeBinding>() {
     }
 
     override fun init() {
-
+        getDataHome()
+    }
+    private fun getDataHome(){
+        viewModel.listItemHome.observe(viewLifecycleOwner){
+            Log.e("hello",it.toString())
+            homeAdapter.submitList(it)
+        }
     }
 
     override fun initAction() {

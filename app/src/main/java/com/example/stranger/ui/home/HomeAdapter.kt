@@ -1,5 +1,6 @@
 package com.example.stranger.ui.home
 
+import android.util.Log
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import com.example.stranger.R
@@ -14,7 +15,7 @@ import com.example.stranger.ui.home.viewholer.HeaderHomeViewHolder
 import com.example.stranger.ui.home.viewholer.HomeViewHolder
 
 class HomeAdapter(
-    private val viewModel: HomeViewModel,private val openFragment: (String) -> Unit
+    private val viewModel: HomeViewModel, private val openFragment: (String) -> Unit
 ) : BaseRecyclerAdapter<ItemHome, BaseViewHolder<ItemHome, ViewDataBinding>>(ItemDiffUtilCallback()) {
 
     companion object {
@@ -37,15 +38,16 @@ class HomeAdapter(
         holder: BaseViewHolder<ItemHome, ViewDataBinding>,
         position: Int
     ) {
-        if (holder is HeaderHomeViewHolder) {
-            (holder.binding as ItemHaderHomeBinding).profileImage.setOnClickListener {
-               openFragment.invoke(OPEN_PROFILE)
+        when (holder) {
+            is HeaderHomeViewHolder -> {
+                (holder.binding as ItemHaderHomeBinding).profileImage.setOnClickListener {
+                    openFragment.invoke(OPEN_PROFILE)
+                }
+                holder.binding.text.setOnClickListener {
+                    openFragment.invoke(OPEN_POST)
+                }
             }
-            holder.binding.text.setOnClickListener{
-                openFragment.invoke(OPEN_POST)
-            }
-        } else {
-            if (currentList.size > 0) {
+            is HomeViewHolder -> if (itemCount > 1) {
                 holder.bind(getItem(position - 1))
             }
         }

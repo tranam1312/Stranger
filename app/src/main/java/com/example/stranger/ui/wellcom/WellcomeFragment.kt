@@ -17,27 +17,25 @@ class WellcomeFragment : BaseFragmentWithBinding<FragmentWellcomeBinding>() {
         fun newInstance() = WellcomeFragment()
     }
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
 
     override fun getViewBinding(inflater: LayoutInflater): FragmentWellcomeBinding =
         FragmentWellcomeBinding.inflate(inflater)
             .apply { lifecycleOwner = viewLifecycleOwner }
 
     override fun init() {
-        if (!auth.currentUser?.uid.isNullOrEmpty())
-            splashActivity.replaceFragmentNoBack(MainFragment.newInstance())
+
     }
 
     override fun initAction() {
         binding.signIn.setOnClickListener {
-            splashActivity.replaceFragment(
+            replaceFragment(
                 SignInFragment.newInstance(),
                 SignInFragment::class.java.name
             )
         }
+
         binding.signUp.setOnClickListener {
-            splashActivity.replaceFragment(
+            replaceFragment(
                 SignUpFragment.newInstance(),
                 SignInFragment::class.java.name
             )

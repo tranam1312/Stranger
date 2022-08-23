@@ -33,7 +33,7 @@ abstract class BaseFragment : Fragment() {
         initAction()
     }
 
-    open fun setToolBar(activity: SplashActivity) {
+    open fun setToolBar(activity: AppCompatActivity) {
 
     }
 
@@ -44,5 +44,16 @@ abstract class BaseFragment : Fragment() {
         requireActivity().finish()
     }
 
+    fun addFragment(fragment: Fragment, className: String) =
+        splashActivity.addFragment(fragment, className)
+
+    fun replaceFragment(fragment: Fragment, className: String) =
+        splashActivity.replaceFragment(fragment, className)
+
+    fun replaceFragmentNoBack(fragment: Fragment) = splashActivity.replaceFragmentNoBack(fragment)
+
+    fun onBackPressed(){
+        splashActivity.onBackPressed()
+    }
 
 }

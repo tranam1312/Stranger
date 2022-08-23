@@ -7,8 +7,8 @@ abstract class BaseViewHolder<T : Any, VB : ViewDataBinding>(
     private val binding: VB
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    private var itemData: T? = null
-        private set
+    private var _itemData: T? = null
+        val itemData get() = _itemData
 
     init {
         itemView.setOnClickListener {
@@ -17,7 +17,7 @@ abstract class BaseViewHolder<T : Any, VB : ViewDataBinding>(
     }
 
     open fun bind(itemData: T) {
-        this.itemData = itemData
+        this._itemData = itemData
     }
 
     open fun onItemClickListener(itemData: T){

@@ -10,6 +10,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.stranger.R
 import com.example.stranger.local.Preferences
+import com.example.stranger.ui.main.MainFragment
+
 
 abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
     private var exit: Int = 0
@@ -35,40 +37,19 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
     }
 
     fun replaceFragment(fragment: Fragment, className: String) {
+        Log.e("alo", supportFragmentManager.fragments.toString())
         Log.e("alo", supportFragmentManager.backStackEntryCount.toString())
         supportFragmentManager.beginTransaction().addToBackStack(className)
-            .replace(R.id.fragment, fragment).commit()
+            .replace(com.example.stranger.R.id.fragment, fragment).commit()
     }
 
     fun replaceFragmentNoBack(fragment: Fragment) {
-        Log.e("alo", supportFragmentManager.backStackEntryCount.toString())
         supportFragmentManager.beginTransaction().replace(R.id.fragment, fragment).commit()
     }
 
-    fun removeFragment() {
-        Handler().postDelayed({
-        Log.e("alo", supportFragmentManager.backStackEntryCount.toString())
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            Log.e("alo", supportFragmentManager.fragments.toString())
-            var listFragment = supportFragmentManager.fragments
-            for (i in listFragment.size - 2 downTo 0) {
-                supportFragmentManager.fragments.removeAt(i)
-            }
-            supportFragmentManager.beginTransaction().commitAllowingStateLoss()
-        }
-        supportFragmentManager.executePendingTransactions()
-
-        Log.e("alo", supportFragmentManager.fragments.toString())
-
-        },500L)
-    }
-
     override fun onBackPressed() {
-        Log.e("alo", supportFragmentManager.backStackEntryCount.toString())
-        Log.e("alo", supportFragmentManager.fragments.toString())
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            super.onBackPressed()
-        } else {
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment)
+        if (fragment is MainFragment) {
             exit++
             if (exit == 2) {
                 finish()
@@ -78,7 +59,6 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
                     exit = 0
                 }, 3000)
             }
-        }
-
+        } else super.onBackPressed()
     }
 }

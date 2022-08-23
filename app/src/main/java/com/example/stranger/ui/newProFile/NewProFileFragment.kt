@@ -73,7 +73,9 @@ class NewProFileFragment : BaseFragmentWithBinding<FragmentNewProFileBinding>() 
         viewModel.proFile.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> binding.buttonConfrim.isEnabled = false
-                is State.Success -> splashActivity.replaceFragmentNoBack(MainFragment.newInstance())
+                is State.Success -> {
+                    splashActivity.addFragment(MainFragment.newInstance(),MainFragment::class.java.name)
+                }
                 is State.Error -> {
                     binding.buttonConfrim.isEnabled = false
                 }

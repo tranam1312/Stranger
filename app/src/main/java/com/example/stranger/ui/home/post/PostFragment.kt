@@ -12,6 +12,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -43,7 +44,7 @@ class PostFragment : BaseFragmentWithBinding<FragmentPostBinding>() {
             viewmodel = viewModel
         }
 
-    override fun setToolBar(activity: SplashActivity) {
+    override fun setToolBar(activity: AppCompatActivity) {
         binding.toolbar.apply {
             setTitle("Tạo bài viết")
             setIconLeft(R.drawable.ic_arrow_left)
@@ -76,8 +77,8 @@ class PostFragment : BaseFragmentWithBinding<FragmentPostBinding>() {
             var intent = Intent(context,PostService::class.java)
             intent.putExtra("image",data)
             intent.putExtra("content",binding.appCompatEditText.text.toString())
-            startForegroundService(requireContext().applicationContext,intent)
-            finish()
+            requireActivity().applicationContext.startForegroundService(intent)
+            onBackPressed()
         }
 
     }

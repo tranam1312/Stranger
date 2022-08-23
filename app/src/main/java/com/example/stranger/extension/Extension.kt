@@ -32,7 +32,20 @@ fun TextView.setTextColorRes(@ColorRes color: Int) = setTextColor(context.getCol
 internal val Context.layoutInflater: LayoutInflater
     get() = LayoutInflater.from(this)
 
+fun getTimeDate(): Long = System.currentTimeMillis()
+
 internal fun randomColor(): Int {
     val rnd = Random()
     return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+}
+
+fun <K, V> HashMap<K, V>.toArrayList(hashMap: HashMap<K, V>): ArrayList<V> {
+    val listKey = hashMap.keys
+    val arrayList: ArrayList<V> = arrayListOf()
+    for (key in listKey){
+        hashMap[key].apply {
+
+        }
+    }
+    return arrayList
 }
