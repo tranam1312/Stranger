@@ -1,32 +1,50 @@
-
 package com.example.stranger.ui.music
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.example.stranger.R
+import androidx.fragment.app.activityViewModels
+import com.example.stranger.base.BaseFragmentWithBinding
+import com.example.stranger.databinding.FragmentMusicBinding
+import com.example.stranger.model.Song
+import com.example.stranger.service.MusicService
+import dagger.hilt.android.AndroidEntryPoint
 
-class MusicFragment : Fragment() {
+@AndroidEntryPoint
+class MusicFragment : BaseFragmentWithBinding<FragmentMusicBinding>() {
+    private lateinit var songAdapter: SongAdapter
+    private var listSong: ArrayList<Song> = arrayListOf()
 
     companion object {
         fun newInstance() = MusicFragment()
     }
 
-    private lateinit var viewModel: MusicViewModel
+    private val viewModel: MusicViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_music, container, false)
+
+    override fun getViewBinding(inflater: LayoutInflater): FragmentMusicBinding =
+        FragmentMusicBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            songAdapter = SongAdapter(onClickSong)
+            rvSong.adapter = songAdapter
+        }
+
+    override fun init() {
+        viewModel.getDataMusicServer()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MusicViewModel::class.java)
+    override fun initData() {
+        viewModel.listSong.observe(viewLifecycleOwner) {
+            songAdapter.submitList(it)
+            listSong = it
+        }
     }
 
+    override fun initAction() {
+
+    }
+
+
+    private val onClickSong: (Song) -> Unit = {
+        splashActivity.startServiceMusic(it, 1)
+    }
 }

@@ -3,12 +3,12 @@ package com.example.stranger.base.recyclerview
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-open class BaseViewHolder<T : Any, VB : ViewDataBinding>(
+abstract class BaseViewHolder<T : Any, VB : ViewDataBinding>(
     private val binding: VB
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    private var itemData: T? = null
-        private set
+    private var _itemData: T? = null
+        val itemData get() = _itemData
 
     init {
         itemView.setOnClickListener {
@@ -17,7 +17,7 @@ open class BaseViewHolder<T : Any, VB : ViewDataBinding>(
     }
 
     open fun bind(itemData: T) {
-        this.itemData = itemData
+        this._itemData = itemData
     }
 
     open fun onItemClickListener(itemData: T){

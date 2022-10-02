@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Created by Trần Nam on 8/27/22, 3:27 AM
+  ~    tranhoainam1312@gmail.com
+  ~     Last modified 8/27/22, 3:27 AM
+  ~     Copyright (c) 2022.
+  ~     All rights reserved.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.stranger.model.ItemHome" />
+
+        <variable
+            name="profile"
+            type="com.example.stranger.model.ProFile" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.stranger.ui.home.comment.CommentViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.example.stranger.base.BaseHeader
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/cardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/st12dp"
+                    android:layout_marginTop="@dimen/st4dp"
+                    android:layout_marginEnd="@dimen/st12dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/st4dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/avatar"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="2dp"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/circle"
+                            app:srcCompat="@drawable/q"
+                            app:strokeColor="@color/black"
+                            app:strokeWidth="1dp"
+                            app:url="@{profile.imgUrlAvatar}" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/st12dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:text="@{profile.name}"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageButton
+                            android:id="@+id/them"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_more_horizontal" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:text="@{item.content}"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:text="Dẫn 3-0 sau 28 phút, tưởng như HAGL sẽ thắng dễ dàng nhưng Nam Định không dễ bị khuất phục. Đội khách ghi liền ba bàn để gỡ hoà. Thậm chí bàn thứ ba của Nam Định ghi sau khi đội trưởng Lâm Anh Quang bị truất quyền thi đấu vì thẻ đỏ. Nhưng, ngay sau đó, Công Phượng lại ghi bàn phạt đền để giúp HAGL thắng trận thứ năm liên tiếp. Thầy trò Kiatisuk xây chắc đỉnh bảng, tạo cách biệt ba điểm với đội thứ hai Viettel." />
+
+                    <androidx.constraintlayout.utils.widget.ImageFilterView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="@dimen/st12dp"
+                        android:adjustViewBounds="true"
+                        app:round="@dimen/st12dp"
+                        app:url="@{item.urlImage}" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="@dimen/st12dp"
+                        android:background="#D3D3D3" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/st4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/like"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:padding="@dimen/st4dp"
+                            android:src="@drawable/ic_heart" />
+
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:backgroundTint="@color/white"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_comment_svgrepo_com" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/share"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:backgroundTint="@color/white"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_share_2" />
+                    </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/st12dp"
+                    android:layout_marginTop="@dimen/st8dp"
+                    android:text="Tất cả bình luận (100)" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/st12dp"
+                    android:layout_marginTop="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_reply_comment" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/st8dp">
+
+                <ImageView
+                    android:id="@+id/emoji"
+                    android:layout_width="40dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/ic_baseline_insert_emoticon_24" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/st4dp"
+                    android:layout_marginEnd="@dimen/st8dp"
+                    android:layout_weight="1"
+                    android:afterTextChanged="@{viewmodel.textChange}"
+                    android:gravity="fill_vertical"
+                    android:hint="Viết bình luận ...."
+                    android:inputType="textLongMessage"
+                    android:maxHeight="150dp"
+                    android:padding="@dimen/st4dp"
+                    android:text="@={viewmodel.contentComment}"
+                    android:textSize="@dimen/st14sp" />
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/open_library"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom"
+                    android:adjustViewBounds="true"
+                    android:backgroundTintMode="src_over"
+                    android:src="@drawable/ic_image_photo_svgrepo_com"
+                    android:visibility="@{viewmodel.showPostComment ? View.GONE : View.VISIBLE}" />
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/post_comment"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom"
+                    android:adjustViewBounds="true"
+                    android:backgroundTintMode="src_over"
+                    android:src="@drawable/ic_share_2"
+                    android:visibility="@{viewmodel.showPostComment ? View.VISIBLE : View.GONE}" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

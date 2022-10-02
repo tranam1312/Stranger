@@ -30,6 +30,10 @@ class SignUpFragment : BaseFragmentWithBinding<FragmentSignUpBinding>() {
 
     }
 
+    override fun initData() {
+
+    }
+
     override fun initAction() {
         binding.signUp.setOnClickListener { viewModel.login() }
     }

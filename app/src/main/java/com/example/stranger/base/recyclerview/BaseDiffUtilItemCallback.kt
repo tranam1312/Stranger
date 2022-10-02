@@ -11,7 +11,6 @@ abstract class BaseDiffUtilItemCallback<T : Any> : DiffUtil.ItemCallback<T>() {
     }
 
 
-    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
         return oldItem == newItem
     }

@@ -3,4 +3,10 @@
     <string name="signup">sign up</string>
     <string name="post">Bài viết</string>
     <string name="search">Tìm kiếm </string>
+    <string name="open_library_title">Chọn ảnh từ</string>
+    <string name="camera">Camera</string>
+    <string name="library">Thư viện ảnh</string>
+    <string name="cancel">Hủy bỏ</string>
+    <string name="post_notifi">post notification</string>
+    <string name="channel_post_notifi">thông báo post notification</string>
 </resources>

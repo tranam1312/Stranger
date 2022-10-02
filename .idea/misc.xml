@@ -3,27 +3,63 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/activity_splash.xml" value="0.35052083333333334" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_home.xml" value="0.35052083333333334" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_main.xml" value="0.15462962962962962" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_message.xml" value="0.14722222222222223" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_music.xml" value="0.14722222222222223" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_post.xml" value="0.1734375" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_pro_file.xml" value="0.14722222222222223" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_sign_in.xml" value="0.35052083333333334" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_sign_up.xml" value="0.35052083333333334" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/fragment_wellcome.xml" value="0.14722222222222223" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/item_hader_home.xml" value="0.14722222222222223" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/item_home.xml" value="0.14722222222222223" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/item_post.xml" value="0.14722222222222223" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/open_library_dialog.xml" value="0.14722222222222223" />
+        <entry key="..\:/New folder/Stranger/app/src/main/res/layout/toolbar.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/.gradle/caches/transforms-3/bb4e7f6d3ab2b6f6dabcacfbf192a226/transformed/core-1.7.0/res/drawable-v21/notification_action_background.xml" value="0.274" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/back_ground_corner_radius_libery.xml" value="0.1" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/background_card.xml" value="0.108" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/border_rim_3dp.xml" value="0.116" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_arrow_bottom_1_svgrepo_com.xml" value="0.104" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_arrow_bottom_svgrepo_com.xml" value="0.104" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_arrow_left.xml" value="0.2785" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_arrow_right.xml" value="0.284" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_bell.xml" value="0.1935" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_camera__1_.xml" value="0.199" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_edit.xml" value="0.3075" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_home.xml" value="0.1935" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_image.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_image_24dp.xml" value="0.2845" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_image_photo_svgrepo_com.xml" value="0.121" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_lock.xml" value="0.332" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_mail.xml" value="0.332" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_message_circle.xml" value="0.3275" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_message_square.xml" value="0.1935" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_more_horizontal.xml" value="0.3275" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_music.xml" value="0.1935" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_photo_camera_svgrepo_com.xml" value="0.121" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_search.xml" value="0.3075" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_settings.xml" value="0.1935" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_share.xml" value="0.3275" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_share_svgrepo_com.xml" value="0.3275" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_share_svgrepo_com__1_.xml" value="0.3275" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_star.xml" value="0.3275" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_user.xml" value="0.284" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_x.xml" value="0.2845" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/drawable/shape.xml" value="0.199" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/custom_snackbar.xml" value="0.3625" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_forgot_password.xml" value="0.2858974358974359" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_home.xml" value="0.29743589743589743" />
-        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_main.xml" value="0.15213675213675212" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_main.xml" value="0.25" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_message.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_music.xml" value="0.29743589743589743" />
-        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_new_pro_file.xml" value="0.28888888888888886" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_new_pro_file.xml" value="0.29107981220657275" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_notification.xml" value="0.29743589743589743" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_post.xml" value="0.367911479944675" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_search_home.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_setting.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_sign_in.xml" value="0.2798913043478261" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />
@@ -31,10 +67,56 @@
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/item_hader_hom.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/item_hader_home.xml" value="0.176" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/item_home.xml" value="0.29743589743589743" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/item_post.xml" value="0.75" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/open_library_dialog.xml" value="0.33" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/snackbar.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/toolbar.xml" value="0.3625" />
+        <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/layout/view_notification_post.xml" value="0.33" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.15128205128205127" />
         <entry key="..\:/Users/anhna/Desktop/New folder/Stranger/app/src/main/res/menu/menu_home.xml" value="0.3625" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable-v24/ic_like.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/back_ground_corner_radius_libery.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/background_card.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/border_rim_3dp.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_baseline_insert_emoticon_24.xml" value="0.2365" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.2365" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_comment_svgrepo_com.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_heart.xml" value="0.2375" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_heart_enable.xml" value="0.222" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_home.xml" value="0.233" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_message_circle.xml" value="0.22" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_music.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_pause.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_play.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_share_2.xml" value="0.2375" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_skip_back.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_skip_forward.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/ic_x_black.xml" value="0.237" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/drawable/shape.xml" value="0.2365" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/activity_main.xml" value="0.33645833333333336" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/activity_splash.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/custom_snackbar.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_comment.xml" value="0.22" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_home.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_main.xml" value="0.33" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_music.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_post.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_pro_file.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_setting.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/fragment_sign_in.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/item_comment.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/item_hader_home.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/item_home.xml" value="0.6039453717754173" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/item_post.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/item_reply_comment.xml" value="0.2265625" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/item_song.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/open_library_dialog.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/show_reply_comment.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/toolbar.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/layout/view_notification_post.xml" value="0.2265625" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/menu/menu_home.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/anhna/OneDrive/Desktop/New folder/Stranger/app/src/main/res/xml/network_security_config.xml" value="0.35052083333333334" />
       </map>
     </option>
   </component>
@@ -42,7 +124,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.1" />
+        <option name="scale" value="0.5" />
       </ProjectState>
     </option>
   </component>
