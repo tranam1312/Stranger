@@ -3,4 +3,16 @@
     <dimen name="st10dp">10dp</dimen>
     <dimen name="st16dp">16dp</dimen>
     <dimen name="st12sp">12sp</dimen>
+    <dimen name="st24dp">24dp</dimen>
+    <dimen name="st30dp">30dp</dimen>
+    <dimen name="st12dp">12dp</dimen>
+    <dimen name="st13sp">13sp</dimen>
+    <dimen name="st3dp">3dp</dimen>
+    <dimen name="st16sp">16sp</dimen>
+    <dimen name="st6dp">6dp</dimen>
+    <dimen name="st4dp">4dp</dimen>
+    <dimen name="st14sp">14sp</dimen>
+    <dimen name="st8dp">8dp</dimen>
+    <dimen name="st5dp">5dp</dimen>
+    <dimen name="st9dp">9dp</dimen>
 </resources>

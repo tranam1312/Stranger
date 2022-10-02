@@ -1,7 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+<<<<<<< HEAD
 aaa
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.stranger.model.ItemHome" />
+
+        <variable
+            name="profile"
+            type="com.example.stranger.model.ProFile" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.stranger.ui.home.HomeViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemView"
+        android:layout_marginTop="8dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/st12dp"
+            android:layout_marginTop="@dimen/st4dp"
+            android:layout_marginEnd="@dimen/st12dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/st4dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/circle"
+                    app:srcCompat="@drawable/q"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="1dp"
+                    app:url="@{profile.imgUrlAvatar}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/st12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:text="@{profile.name}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintEnd_toStartOf="@+id/them"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    app:layout_constraintVertical_bias="0.07999998" />
+
+                <ImageButton
+                    android:id="@+id/them"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_more_horizontal" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:text="@{item.content}"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="Dẫn 3-0 sau 28 phút, tưởng như HAGL sẽ thắng dễ dàng nhưng Nam Định không dễ bị khuất phục. Đội khách ghi liền ba bàn để gỡ hoà. Thậm chí bàn thứ ba của Nam Định ghi sau khi đội trưởng Lâm Anh Quang bị truất quyền thi đấu vì thẻ đỏ. Nhưng, ngay sau đó, Công Phượng lại ghi bàn phạt đền để giúp HAGL thắng trận thứ năm liên tiếp. Thầy trò Kiatisuk xây chắc đỉnh bảng, tạo cách biệt ba điểm với đội thứ hai Viettel." />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="@dimen/st12dp"
+                app:round="@dimen/st12dp"
+                app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/container"
+                app:url="@{item.urlImage}" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="@dimen/st12dp"
+                android:background="#D3D3D3"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dots_indicator" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/st4dp"
+               android:layout_marginVertical="@dimen/st8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/like"
+                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/st30dp"
+                    android:layout_marginEnd="@dimen/st8dp"
+                    android:padding="@dimen/st3dp"
+                    android:src="@drawable/ic_heart"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/comment"
+                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/st30dp"
+                    android:layout_marginEnd="@dimen/st4dp"
+                    android:padding="@dimen/st3dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_message_square" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/share"
+                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/st30dp"
+                    android:layout_marginEnd="@dimen/st4dp"
+                    android:padding="@dimen/st4dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_share_2" />
+            </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+</layout>
+>>>>>>> main

@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
+import com.example.stranger.extension.hideKeyboard
 
-abstract  class BaseFragmentWithBinding<VB: ViewBinding> : BaseFragment() {
+abstract class BaseFragmentWithBinding<VB : ViewBinding,> : BaseFragment() {
     private var _binding: VB? = null
     val binding get() = _binding!!
 
@@ -21,15 +22,8 @@ abstract  class BaseFragmentWithBinding<VB: ViewBinding> : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init()
-        initAction()
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-    abstract fun init()
-    abstract fun initAction()
 }

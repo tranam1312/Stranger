@@ -1,62 +1,71 @@
 package com.example.stranger.base
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Message
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Snackbar
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.ui.Modifier
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.snackbar.Snackbar
+import com.example.stranger.local.Preferences
+import com.example.stranger.ui.Dialog.OpenLibraryDialog
+import com.example.stranger.ui.SplashActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
-
+@AndroidEntryPoint
 abstract class BaseFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+    protected lateinit var splashActivity: SplashActivity
+    protected val preferences: Preferences by lazy {
+        Preferences.getInstance(requireContext())
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home -> {
-            findNavController().popBackStack()
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        getToolbar()
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        splashActivity = activity as SplashActivity
+        setToolBar(splashActivity)
+        init()
+        initData()
+        initAction()
+    }
+
+    open fun setToolBar(activity: AppCompatActivity) {
 
     }
 
-    protected fun setToolbar() {
-        getToolbar()?.let {
-            (requireActivity() as AppCompatActivity).setSupportActionBar(it)
-            (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(
-                true
-            )
+    abstract fun init()
+    abstract fun initData()
+    abstract fun initAction()
+
+
+    fun finish() {
+        requireActivity().finish()
+    }
+
+    fun addFragment(fragment: Fragment, className: String) =
+        splashActivity.addFragment(fragment, className)
+
+    fun replaceFragment(fragment: Fragment, className: String) =
+        splashActivity.replaceFragment(fragment, className)
+
+    fun replaceFragmentNoBack(fragment: Fragment) = splashActivity.replaceFragmentNoBack(fragment)
+
+    fun onBackPressed() {
+        splashActivity.onBackPressed()
+    }
+
+    fun openDialog(onClickOpenLibraryDialog: ((Int) -> Unit)? = null) {
+        fragmentManager?.let {
+            val fragment = OpenLibraryDialog.newInstance(onClickOpenLibraryDialog)
+            it.beginTransaction().add(fragment, fragment.tag).commit()
         }
     }
-    open fun showSnackBar(message:String, duration: Int = Snackbar.LENGTH_SHORT ){
-        view?.let { Snackbar.make(it,message, duration).show() }
-    }
-
-
-
-
-    protected fun getToolbar(): MaterialToolbar? = null
 
 }

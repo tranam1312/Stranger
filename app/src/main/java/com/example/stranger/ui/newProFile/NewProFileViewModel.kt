@@ -10,7 +10,6 @@ import com.example.stranger.model.ProFile
 import com.example.stranger.repository.Repository
 import com.prdcv.ehust.common.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,9 +18,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewProFileViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+
     var checkData: ObservableBoolean = ObservableBoolean()
     private val _proFile = SingleLiveEvent<State<ProFile>>()
     val proFile get() = _proFile
+
     fun updateData(@NonNull name: String?) {
         viewModelScope.launch {
             withContext(viewModelScope.coroutineContext) {
@@ -33,7 +34,6 @@ class NewProFileViewModel @Inject constructor(private val repository: Repository
                             }
                     }
             }
-
         }
     }
 

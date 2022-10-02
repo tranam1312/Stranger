@@ -1,9 +1,10 @@
 package com.example.stranger.model
 
-data class  ReplyComment(
-    val uid: String="",
-    val key: String="",
-    var container: String ="",
-    var listLikeReplyComment: ArrayList<String>? = arrayListOf(),
-    var urlImg: String?= "",
-    val dateTime: String? ="")
+data class ReplyComment(
+    val uid: String? = null,
+    val key: String? = null,
+    var container: String? = null,
+    var listLikeReplyComment: ArrayList<String>? = null,
+    var urlImg: String? = null,
+    val dateTime: String? = null
+)
