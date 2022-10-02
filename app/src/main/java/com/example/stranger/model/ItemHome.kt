@@ -14,9 +14,9 @@ data class ItemHome(
     @SerializedName("urlImage")
     var urlImage: String? = null,
     @SerializedName("listUserLike")
-    var listUserLike: ArrayList<String>? = null,
+    var listUserLike: ArrayList<String>? = arrayListOf(),
     @SerializedName("listCommnent")
-    var listCommnent: HashMap<String, Comment>? = null,
+    var listCommnent: HashMap<String, Comment>? = hashMapOf(),
     @SerializedName("datetime")
     val datetime: Long? = null
 )

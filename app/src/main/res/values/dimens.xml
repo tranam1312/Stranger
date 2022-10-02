@@ -12,4 +12,7 @@
     <dimen name="st6dp">6dp</dimen>
     <dimen name="st4dp">4dp</dimen>
     <dimen name="st14sp">14sp</dimen>
+    <dimen name="st8dp">8dp</dimen>
+    <dimen name="st5dp">5dp</dimen>
+    <dimen name="st9dp">9dp</dimen>
 </resources>

@@ -38,6 +38,10 @@ class NewProFileFragment : BaseFragmentWithBinding<FragmentNewProFileBinding>() 
         proFile()
     }
 
+    override fun initData() {
+
+    }
+
 
     override fun initAction() {
         binding.buttonConfrim.setOnClickListener {
@@ -104,12 +108,7 @@ class NewProFileFragment : BaseFragmentWithBinding<FragmentNewProFileBinding>() 
             }
     }
 
-    private fun openDialog() {
-        fragmentManager?.let {
-            val fragment = OpenLibraryDialog.newInstance(onClickOpen)
-            it.beginTransaction().add(fragment, fragment.tag).commit()
-        }
-    }
+
 
     private val onClickOpen: (Int) -> Unit = {
         when (it) {

@@ -7,5 +7,5 @@ data class Comment(
     var listLikeComment: ArrayList<String>? = null,
     var listReplyComment: HashMap<String, ReplyComment>? = null,
     var urlImg: String? = null,
-    val datetime: String? =null
+    val datetime: Long? =null
 )

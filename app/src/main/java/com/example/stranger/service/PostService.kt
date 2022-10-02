@@ -16,19 +16,21 @@ import com.example.stranger.common.State
 import com.example.stranger.extension.getTimeDate
 import com.example.stranger.model.ItemHome
 import com.example.stranger.repository.Repository
-import com.example.stranger.ui.home.post.PostFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PostService : Service() {
     private val scope = CoroutineScope(Job() + Dispatchers.IO)
     private val CHANNEL_ID = "POST_NOTIFICATION"
-    private val repository: Repository = Repository()
     private var content: String? = null
-
+    @Inject
+    lateinit var repository: Repository
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         val bitmap = intent.extras?.get("image")
         content = intent.extras?.get("content") as String?
@@ -54,17 +56,17 @@ class PostService : Service() {
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
-        val notification = Notification.Builder(this, CHANNEL_ID)
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Đang tạo bài viết")
             .setSmallIcon(R.drawable.ic_bell)
         notification.setProgress(
-            100, 0, false)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            100, 0, false
+        ).priority = NotificationCompat.PRIORITY_HIGH
         upAnh(data, notification)
         startForeground(1, notification.build())
     }
 
-    private fun upAnh(data: ByteArray, notification: Notification.Builder) {
+    private fun upAnh(data: ByteArray, notification: NotificationCompat.Builder) {
         scope.launch {
             repository.upLoadAnh(data, repository.getKey()).collect {
                 when (it) {

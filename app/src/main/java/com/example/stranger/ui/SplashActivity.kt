@@ -8,6 +8,8 @@ import androidx.navigation.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.BaseActivity
 import com.example.stranger.databinding.ActivitySplashBinding
+import com.example.stranger.model.Song
+import com.example.stranger.service.MusicService
 import com.example.stranger.service.PostService
 import com.example.stranger.ui.main.MainFragment
 import com.example.stranger.ui.wellcom.WellcomeFragment
@@ -25,6 +27,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             addFragment(WellcomeFragment.newInstance(),WellcomeFragment::class.java.name)
         }
 
+    }
+
+     fun startServiceMusic(listSong: Song, position: Int) {
+        val intent = Intent(this, MusicService::class.java)
+        intent.putExtra("listSong", listSong)
+        intent.putExtra("position", position)
+        startService(intent)
     }
 
 

@@ -1,27 +1,22 @@
 package com.example.stranger.ui.Dialog
 
-import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.stranger.R
 import com.example.stranger.databinding.OpenLibraryDialogBinding
 import com.example.stranger.ui.newProFile.NewProFileFragment
 
 class OpenLibraryDialog : DialogFragment() {
     private lateinit var binding: OpenLibraryDialogBinding
-    private lateinit var onClickOpen: (Int) -> Unit
+    private var onClickOpen: ((Int) -> Unit)? = null
 
     companion object {
-        fun newInstance(onClickOpen: (Int) -> Unit): OpenLibraryDialog {
+        fun newInstance(onClickOpen: ((Int) -> Unit)?): OpenLibraryDialog {
             val fragment = OpenLibraryDialog()
             fragment.onClickOpen = onClickOpen
             return fragment
@@ -48,11 +43,11 @@ class OpenLibraryDialog : DialogFragment() {
 
     fun initAction() {
         binding.openLibrary.setOnClickListener {
-            onClickOpen(NewProFileFragment.REQUEST_IMAGE_CAPTURE)
+            onClickOpen?.invoke(NewProFileFragment.REQUEST_IMAGE_CAPTURE)
             dismiss()
         }
         binding.openCamera.setOnClickListener {
-            onClickOpen(NewProFileFragment.CAMERA_PIC_REQUEST)
+            onClickOpen?.invoke(NewProFileFragment.CAMERA_PIC_REQUEST)
             dismiss()
         }
         binding.cancelAction.setOnClickListener {

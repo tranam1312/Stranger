@@ -19,6 +19,7 @@ import androidx.navigation.findNavController
 import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentPostBinding
+import com.example.stranger.extension.hideKeyboard
 import com.example.stranger.service.PostService
 import com.example.stranger.ui.Dialog.OpenLibraryDialog
 import com.example.stranger.ui.SplashActivity
@@ -77,9 +78,13 @@ class PostFragment : BaseFragmentWithBinding<FragmentPostBinding>() {
             var intent = Intent(context,PostService::class.java)
             intent.putExtra("image",data)
             intent.putExtra("content",binding.appCompatEditText.text.toString())
-            requireActivity().applicationContext.startForegroundService(intent)
+            requireActivity().startService(intent)
             onBackPressed()
         }
+
+    }
+
+    override fun initData() {
 
     }
 

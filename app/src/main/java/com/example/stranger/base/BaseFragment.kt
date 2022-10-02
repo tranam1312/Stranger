@@ -7,21 +7,23 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.stranger.local.Preferences
+import com.example.stranger.ui.Dialog.OpenLibraryDialog
 import com.example.stranger.ui.SplashActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 abstract class BaseFragment : Fragment() {
     protected lateinit var splashActivity: SplashActivity
     protected val preferences: Preferences by lazy {
         Preferences.getInstance(requireContext())
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -30,6 +32,7 @@ abstract class BaseFragment : Fragment() {
         splashActivity = activity as SplashActivity
         setToolBar(splashActivity)
         init()
+        initData()
         initAction()
     }
 
@@ -38,7 +41,9 @@ abstract class BaseFragment : Fragment() {
     }
 
     abstract fun init()
+    abstract fun initData()
     abstract fun initAction()
+
 
     fun finish() {
         requireActivity().finish()
@@ -52,8 +57,15 @@ abstract class BaseFragment : Fragment() {
 
     fun replaceFragmentNoBack(fragment: Fragment) = splashActivity.replaceFragmentNoBack(fragment)
 
-    fun onBackPressed(){
+    fun onBackPressed() {
         splashActivity.onBackPressed()
+    }
+
+    fun openDialog(onClickOpenLibraryDialog: ((Int) -> Unit)? = null) {
+        fragmentManager?.let {
+            val fragment = OpenLibraryDialog.newInstance(onClickOpenLibraryDialog)
+            it.beginTransaction().add(fragment, fragment.tag).commit()
+        }
     }
 
 }

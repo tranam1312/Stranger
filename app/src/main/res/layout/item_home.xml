@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
         <variable
@@ -11,44 +12,56 @@
         <variable
             name="profile"
             type="com.example.stranger.model.ProFile" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.stranger.ui.home.HomeViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true">
+        android:id="@+id/itemView"
+        android:layout_marginTop="8dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/st12dp"
+            android:layout_marginTop="@dimen/st4dp"
+            android:layout_marginEnd="@dimen/st12dp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="1">
+                android:layout_marginTop="@dimen/st4dp"
+                android:orientation="horizontal">
 
-                <androidx.constraintlayout.utils.widget.ImageFilterView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/avatar"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/av"
-                    app:round="6000dp" />
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/circle"
+                    app:srcCompat="@drawable/q"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="1dp"
+                    app:url="@{profile.imgUrlAvatar}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="@dimen/st12dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:text="@string/app_name"
+                    android:text="@{profile.name}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
+
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintEnd_toStartOf="@+id/them"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -61,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_more_horizontal" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -71,10 +84,9 @@
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="12dp"
                 android:ellipsize="end"
                 android:maxLines="5"
                 android:text="@{item.content}"
@@ -91,9 +103,10 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="40dp"
                 android:adjustViewBounds="true"
+                android:layout_marginTop="@dimen/st12dp"
+                app:round="@dimen/st12dp"
                 app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +117,8 @@
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="@dimen/st12dp"
                 android:background="#D3D3D3"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -113,65 +127,42 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="40dp"
                 android:orientation="horizontal"
-                android:weightSum="3"
+                android:padding="@dimen/st4dp"
+               android:layout_marginVertical="@dimen/st8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/like"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/white"
-                    android:drawableStart="@drawable/ic_heart"
-                    android:text="Yêu thích"
-                    android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    app:iconGravity="textStart"
-                    app:iconSize="13dp"
-                    app:iconTint="@color/black" />
+                    android:layout_width="@dimen/st30dp"
+                    android:layout_marginEnd="@dimen/st8dp"
+                    android:padding="@dimen/st3dp"
+                    android:src="@drawable/ic_heart"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/comment"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/white"
-                    android:text="Bình luận"
-                    android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    app:icon="@drawable/ic_message_square"
-                    app:iconGravity="textStart"
-                    app:iconTint="@color/black" />
+                    android:layout_width="@dimen/st30dp"
+                    android:layout_marginEnd="@dimen/st4dp"
+                    android:padding="@dimen/st3dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_message_square" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/share"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/white"
-                    android:drawableStart="@drawable/ic_share_2"
-                    android:text="Chia sẻ"
-                    android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    app:iconGravity="textStart"
-                    app:iconSize="13dp"
-                    app:iconTint="@color/black" />
+                    android:layout_width="@dimen/st30dp"
+                    android:layout_marginEnd="@dimen/st4dp"
+                    android:padding="@dimen/st4dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_share_2" />
             </LinearLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>

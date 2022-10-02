@@ -89,6 +89,10 @@ class SignInFragment : BaseFragmentWithBinding<FragmentSignInBinding>() {
         firebaseUser()
     }
 
+    override fun initData() {
+
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {

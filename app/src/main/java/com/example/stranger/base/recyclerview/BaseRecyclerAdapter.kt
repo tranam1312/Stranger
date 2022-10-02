@@ -3,12 +3,12 @@ package com.example.stranger.base.recyclerview
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IntDef
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 
 @Retention(AnnotationRetention.SOURCE)
 annotation class RecyclerType
@@ -17,15 +17,16 @@ abstract class BaseRecyclerAdapter<T : Any, VH : BaseViewHolder<T,ViewDataBindin
 ) : ListAdapter<T, VH>(diffUtilCallback) {
 
     @LayoutRes
-    abstract fun getItemLayoutResource(@RecyclerType viewType: Int): Int
+    abstract fun getItemLayoutResource( @RecyclerType viewType: Int): Int
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bind(getItem(position))
     }
 
     override fun submitList(list: List<T>?) {
-            super.submitList(list ?: emptyList())
+        super.submitList(list ?: emptyList())
     }
+
 
     protected fun getViewHolderDataBinding(parent: ViewGroup, viewType: Int): ViewDataBinding =
         DataBindingUtil.inflate(

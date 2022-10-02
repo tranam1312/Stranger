@@ -1,8 +1,8 @@
 package com.example.stranger.base
 
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.AdaptiveIconDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +10,10 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
 import com.example.stranger.R
 import com.example.stranger.databinding.ToolbarBinding
-import com.example.stranger.ui.SplashActivity
+import com.example.stranger.extension.hideKeyboard
+
 
 class BaseHeader : ConstraintLayout {
     var binding: ToolbarBinding? = null
@@ -43,6 +43,7 @@ class BaseHeader : ConstraintLayout {
         initView()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initView() {
         binding =
             DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.toolbar, this, false)

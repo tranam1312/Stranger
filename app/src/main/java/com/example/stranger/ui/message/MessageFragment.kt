@@ -37,9 +37,11 @@ class MessageFragment : BaseFragmentWithBinding<FragmentMessageBinding>() {
 
     }
 
-    override fun initAction() {
+    override fun initData() {
 
     }
 
+    override fun initAction() {
 
+    }
 }

@@ -1,18 +1,16 @@
 package com.example.stranger.ui.main
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager.widget.ViewPager
 import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentMainBinding
+import com.example.stranger.ui.home.HomeViewModel
+import com.example.stranger.ui.message.MessageViewModel
+import com.example.stranger.ui.notification.NotificationViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +26,10 @@ class MainFragment : BaseFragmentWithBinding<FragmentMainBinding>() {
     private lateinit var mainViewPagerAdapter: MainViewPagerAdapter
     private lateinit var bottomNavigationView: BottomNavigationView
 
-    private val viewModel: MainViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
+    private val messageViewModel: MessageViewModel by activityViewModels()
+    private val notificationViewModel: NotificationViewModel by activityViewModels()
+
     override fun getViewBinding(inflater: LayoutInflater): FragmentMainBinding =
         FragmentMainBinding.inflate(inflater).apply {
             this.lifecycleOwner = viewLifecycleOwner
@@ -47,6 +48,20 @@ class MainFragment : BaseFragmentWithBinding<FragmentMainBinding>() {
         viewPager.adapter = mainViewPagerAdapter
         setItemSelect()
         setPageSelect()
+        homeViewModel.updateItemHomeSize.observe(viewLifecycleOwner) {
+            var homeBader = binding.bottomNavigationView.getOrCreateBadge(R.id.home)
+            if (it == 0) {
+                homeBader.isVisible = false
+                homeBader.clearNumber()
+            } else {
+                homeBader?.isVisible = true
+                homeBader?.number = it
+            }
+        }
+    }
+
+    override fun initData() {
+
     }
 
     fun setItemSelect() {

@@ -26,6 +26,10 @@ class WellcomeFragment : BaseFragmentWithBinding<FragmentWellcomeBinding>() {
 
     }
 
+    override fun initData() {
+
+    }
+
     override fun initAction() {
         binding.signIn.setOnClickListener {
             replaceFragment(
