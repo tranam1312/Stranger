@@ -67,5 +67,12 @@ abstract class BaseFragment : Fragment() {
             it.beginTransaction().add(fragment, fragment.tag).commit()
         }
     }
+    fun showLoading() {
+
+    }
+
+    fun hideLoading() {
+
+    }
 
 }

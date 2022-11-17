@@ -4,9 +4,9 @@ import android.view.ViewGroup
 import com.example.stranger.R
 import com.example.stranger.base.recyclerview.BaseDiffUtilItemCallback
 import com.example.stranger.base.recyclerview.BaseRecyclerAdapter
-import com.example.stranger.model.Song
+import com.example.stranger.model.response.Song
 
-class SongAdapter( private val onClickSong : (Song)-> Unit) : BaseRecyclerAdapter<Song, SongViewHolder>(ItemDiffUtilCallback()) {
+class SongAdapter( private val onClickSong : (Int)-> Unit) : BaseRecyclerAdapter<Song, SongViewHolder>(ItemDiffUtilCallback()) {
 
     class ItemDiffUtilCallback : BaseDiffUtilItemCallback<Song>() {
         override fun areItemsTheSame(oldItem: Song, newItem: Song): Boolean {

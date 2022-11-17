@@ -1,15 +1,12 @@
 package com.example.stranger.ui.signIn
 
 import android.text.Editable
-import androidx.annotation.NonNull
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stranger.common.State
-import com.example.stranger.common.succeeded
-import com.example.stranger.extension.Strings
-import com.example.stranger.model.ProFile
+import com.example.stranger.model.response.ProFile
 import com.example.stranger.repository.Repository
 import com.google.firebase.auth.FirebaseUser
 import com.prdcv.ehust.common.SingleLiveEvent

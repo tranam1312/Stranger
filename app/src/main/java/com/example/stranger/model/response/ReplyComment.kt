@@ -1,4 +1,4 @@
-package com.example.stranger.model
+package com.example.stranger.model.response
 
 data class ReplyComment(
     val uid: String? = null,

@@ -6,7 +6,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stranger.common.State
-import com.example.stranger.model.ProFile
+import com.example.stranger.model.response.ProFile
 import com.example.stranger.repository.Repository
 import com.prdcv.ehust.common.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +28,10 @@ class NewProFileViewModel @Inject constructor(private val repository: Repository
             withContext(viewModelScope.coroutineContext) {
                 repository.getUid()
                     ?.let {
-                        repository.upDateProFile(it, ProFile(repository.getUid(), name = name))
+                        repository.upDateProFile(it, ProFile(
+                            token = repository.getUid(),
+                            name = name
+                        ))
                             .collect { proFile ->
                                 _proFile.value = proFile
                             }

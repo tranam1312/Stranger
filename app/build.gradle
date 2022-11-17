@@ -30,7 +30,6 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
@@ -40,6 +39,12 @@ android {
         dataBinding true
         viewBinding true
     }
+    dependenciesInfo {
+        includeInApk true
+        includeInBundle true
+    }
+    buildToolsVersion '33.0.0'
+    ndkVersion '25.1.8937393'
 }
 dependencies {
 

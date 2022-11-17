@@ -1,11 +1,15 @@
 package com.example.stranger.di
 
+import android.content.Context
 import com.example.stranger.api.Api
+import com.example.stranger.local.Preferences
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

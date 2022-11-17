@@ -1,7 +1,6 @@
 package com.example.stranger.service
 
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
@@ -14,7 +13,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.stranger.R
 import com.example.stranger.common.State
 import com.example.stranger.extension.getTimeDate
-import com.example.stranger.model.ItemHome
+import com.example.stranger.model.response.ItemHome
 import com.example.stranger.repository.Repository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope

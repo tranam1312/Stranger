@@ -12,6 +12,7 @@ import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
@@ -40,11 +41,18 @@ internal fun randomColor(): Int {
     return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
 }
 
+fun convertToMMS(duration: String): String {
+    val millis = duration.toLongOrNull()
+    return String().format("%02d:%02d",
+        millis?.let { TimeUnit.MILLISECONDS.toMinutes(it) % TimeUnit.MILLISECONDS.toMinutes(1) },
+        millis?.let { TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MILLISECONDS.toSeconds(1) })
+}
+
 
 fun <K, V> HashMap<K, V>.toArrayList(hashMap: HashMap<K, V>): ArrayList<V> {
     val listKey = hashMap.keys
     val arrayList: ArrayList<V> = arrayListOf()
-    for (key in listKey){
+    for (key in listKey) {
         hashMap[key].apply {
 
         }

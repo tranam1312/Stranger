@@ -10,17 +10,14 @@ abstract class BaseViewHolder<T : Any, VB : ViewDataBinding>(
     private var _itemData: T? = null
         val itemData get() = _itemData
 
-    init {
-        itemView.setOnClickListener {
-            itemData?.let(::onItemClickListener)
-        }
-    }
 
     open fun bind(itemData: T) {
         this._itemData = itemData
     }
 
-    open fun onItemClickListener(itemData: T){
-
+    open fun onItemClickListener( callBack : ()-> Unit){
+        itemView.setOnClickListener {
+            callBack.invoke()
+        }
     }
 }

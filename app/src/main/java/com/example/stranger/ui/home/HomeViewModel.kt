@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stranger.common.State
-import com.example.stranger.model.ItemHome
-import com.example.stranger.model.ProFile
+import com.example.stranger.model.response.ItemHome
+import com.example.stranger.model.response.ProFile
 import com.example.stranger.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -7,7 +7,7 @@ import com.example.stranger.R
 import com.example.stranger.base.recyclerview.BaseViewHolder
 import com.example.stranger.common.State
 import com.example.stranger.databinding.ItemHomeBinding
-import com.example.stranger.model.ItemHome
+import com.example.stranger.model.response.ItemHome
 import com.example.stranger.ui.home.HomeFragment.Companion.OPEN_COMMENT
 import com.example.stranger.ui.home.HomeViewModel
 import kotlinx.coroutines.Dispatchers

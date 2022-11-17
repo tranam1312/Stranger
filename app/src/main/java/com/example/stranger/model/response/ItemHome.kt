@@ -1,5 +1,6 @@
-package com.example.stranger.model
+package com.example.stranger.model.response
 
+import com.example.stranger.model.response.Comment
 import com.google.gson.annotations.SerializedName
 
 data class ItemHome(

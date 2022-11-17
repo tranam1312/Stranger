@@ -8,15 +8,13 @@
 
 package com.example.stranger.ui.home.comment
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.stranger.R
 import com.example.stranger.base.recyclerview.BaseDiffUtilItemCallback
 import com.example.stranger.base.recyclerview.BaseRecyclerAdapter
 import com.example.stranger.base.recyclerview.BaseViewHolder
-import com.example.stranger.model.ReplyComment
+import com.example.stranger.model.response.ReplyComment
 
 class ReplyCommentAdapter :
     BaseRecyclerAdapter<ReplyComment, ReplyCommentAdapter.ReplyCommentViewHolder>(DiffCallBack()) {

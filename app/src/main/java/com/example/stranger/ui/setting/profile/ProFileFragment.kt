@@ -10,7 +10,8 @@ import com.example.stranger.R
 import com.example.stranger.base.BaseFragmentWithBinding
 import com.example.stranger.databinding.FragmentNewProFileBinding
 
-class ProFileFragment :BaseFragmentWithBinding<FragmentNewProFileBinding>() {
+class
+ProFileFragment :BaseFragmentWithBinding<FragmentNewProFileBinding>() {
 
     companion object {
         fun newInstance() = ProFileFragment()
@@ -26,15 +27,15 @@ class ProFileFragment :BaseFragmentWithBinding<FragmentNewProFileBinding>() {
     }
 
     override fun init() {
-        TODO("Not yet implemented")
+
     }
 
     override fun initData() {
-        TODO("Not yet implemented")
+
     }
 
     override fun initAction() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

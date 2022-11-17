@@ -15,7 +15,7 @@ import com.example.stranger.base.recyclerview.BaseDiffUtilItemCallback
 import com.example.stranger.base.recyclerview.BaseRecyclerAdapter
 import com.example.stranger.base.recyclerview.BaseViewHolder
 import com.example.stranger.databinding.ItemCommentBinding
-import com.example.stranger.model.Comment
+import com.example.stranger.model.response.Comment
 
 class CommentAdapter : BaseRecyclerAdapter<Comment, CommentAdapter.CommentViewHolder>(DiffCallBack()) {
     class DiffCallBack : BaseDiffUtilItemCallback<Comment>() {

@@ -18,7 +18,9 @@ abstract class NetworkBoundRepository<REQUEST> {
         val remotePosts = apiResponse.body()
         if (!apiResponse.isSuccessful || remotePosts == null) {
             emit(State.Error("${apiResponse.code()}, ${apiResponse.errorBody()}"))
+
         }else{
+            
             emit(State.Success(remotePosts))
         }
     }.catch { e ->

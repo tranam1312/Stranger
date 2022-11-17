@@ -6,7 +6,7 @@ import com.example.stranger.api.Api
 import com.example.stranger.common.State
 import com.example.stranger.common.State.Success
 import com.example.stranger.di.NetworkBoundRepository
-import com.example.stranger.model.*
+import com.example.stranger.model.response.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth

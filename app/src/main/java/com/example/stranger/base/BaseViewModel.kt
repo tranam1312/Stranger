@@ -9,8 +9,14 @@
 package com.example.stranger.base
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-abstract class BaseViewModel<FM: Fragment> : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
+    val viewLoading : MutableLiveData<Boolean> = MutableLiveData()
+
+    fun showLoading() = viewLoading.postValue(true)
+
+    fun hideLoading() = viewLoading.postValue(false)
 
 }

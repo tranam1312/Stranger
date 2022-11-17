@@ -7,11 +7,11 @@
 
         <variable
             name="item"
-            type="com.example.stranger.model.ItemHome" />
+            type="com.example.stranger.model.response.ItemHome" />
 
         <variable
             name="profile"
-            type="com.example.stranger.model.ProFile" />
+            type="com.example.stranger.model.response.ProFile" />
 
         <variable
             name="viewmodel"

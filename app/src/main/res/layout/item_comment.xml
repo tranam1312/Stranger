@@ -16,15 +16,15 @@
 
         <variable
             name="profile"
-            type="com.example.stranger.model.ProFile" />
+            type="com.example.stranger.model.response.ProFile" />
 
         <variable
             name="comment"
-            type="com.example.stranger.model.Comment" />
+            type="com.example.stranger.model.response.Comment" />
 
         <variable
             name="replyComment"
-            type="com.example.stranger.model.ReplyComment" />
+            type="com.example.stranger.model.response.ReplyComment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

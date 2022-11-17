@@ -70,7 +70,7 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
 
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment)
-        if (fragment is MainFragment?) {
+        if (fragment is MainFragment) {
             exit++
             if (exit == 2) {
                 finish()

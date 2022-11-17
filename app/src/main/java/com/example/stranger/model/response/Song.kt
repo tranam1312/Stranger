@@ -1,4 +1,4 @@
-package com.example.stranger.model
+package com.example.stranger.model.response
 
 import java.io.Serializable
 

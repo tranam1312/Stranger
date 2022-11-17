@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import com.example.stranger.R
 import com.example.stranger.base.recyclerview.BaseDiffUtilItemCallback
 import com.example.stranger.base.recyclerview.BaseRecyclerAdapter
-import com.example.stranger.model.ItemHome
+import com.example.stranger.model.response.ItemHome
 import com.example.stranger.ui.home.viewholer.HomeViewHolder
 
 class HomeAdapter(
